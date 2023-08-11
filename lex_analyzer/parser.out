@@ -1,0 +1,3388 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    LETTER
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> program_heading SEMICOLON program_block
+Rule 2     program_heading -> PROGRAM identifier
+Rule 3     program_heading -> PROGRAM identifier LPAREN program_parameter_list RPAREN
+Rule 4     program_parameter_list -> identifier_list
+Rule 5     identifier_list -> identifier
+Rule 6     identifier_list -> identifier_list COMMA identifier
+Rule 7     identifier -> ID
+Rule 8     identifier -> UNDERSCORE
+Rule 9     identifier -> identifier STRING
+Rule 10    identifier -> identifier NUMBER
+Rule 11    identifier -> NUMBER
+Rule 12    program_block -> block
+Rule 13    block -> declarative_part statement_part
+Rule 14    declarative_part -> declaration_group
+Rule 15    declarative_part -> declarative_part declaration_group
+Rule 16    declaration_group -> constant_definition_group
+Rule 17    declaration_group -> type_definition_group
+Rule 18    declaration_group -> variable_declaration_group
+Rule 19    constant_definition_group -> CONST constant_definition SEMICOLON
+Rule 20    constant_definition_group -> constant_definition_group constant_definition SEMICOLON
+Rule 21    constant_definition -> ID OPERATOR constant
+Rule 22    constant -> number
+Rule 23    constant -> sign number
+Rule 24    constant -> sign real_number
+Rule 25    sign -> ADD
+Rule 26    sign -> MUL
+Rule 27    number -> decimal_integer
+Rule 28    number -> sign decimal_integer
+Rule 29    decimal_integer -> digit_sequence
+Rule 30    digit_sequence -> NUMBER
+Rule 31    digit_sequence -> digit_sequence NUMBER
+Rule 32    real_number -> digit_sequence ADD fractional_part
+Rule 33    real_number -> digit_sequence exponent scale_factor
+Rule 34    real_number -> digit_sequence ADD fractional_part exponent scale_factor
+Rule 35    fractional_part -> digit_sequence
+Rule 36    scale_factor -> sign digit_sequence
+Rule 37    exponent -> EXPONENT
+Rule 38    variable_declaration_group -> VAR variable_declaration SEMICOLON
+Rule 39    variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON
+Rule 40    variable_declaration -> identifier_list COLON type_denoter
+Rule 41    type_denoter -> type_identifier
+Rule 42    type_identifier -> ID
+Rule 43    type_definition_group -> TYPE type_definition SEMICOLON
+Rule 44    type_definition_group -> type_definition_group type_definition SEMICOLON
+Rule 45    type_definition -> ID ASSIGN type_denoter
+Rule 46    statement_part -> compound_statement
+Rule 47    compound_statement -> BEGIN statement_sequence END_DOT
+Rule 48    compound_statement -> BEGIN statement_sequence END SEMICOLON
+Rule 49    statement_sequence -> statement
+Rule 50    statement_sequence -> statement_sequence SEMICOLON statement
+Rule 51    statement -> simple_statement
+Rule 52    statement -> structured_statement
+Rule 53    simple_statement -> empty_statement
+Rule 54    simple_statement -> assignment_statement
+Rule 55    simple_statement -> procedure_statement
+Rule 56    structured_statement -> compound_statement
+Rule 57    structured_statement -> conditional_statement
+Rule 58    structured_statement -> repetitive_statement
+Rule 59    empty_statement -> SEMICOLON
+Rule 60    assignment_statement -> assignment_statement_lhs ASSIGN expression
+Rule 61    assignment_statement_lhs -> variable_access
+Rule 62    file_variable -> variable_access
+Rule 63    variable_access -> entire_variable
+Rule 64    variable_access -> component_variable
+Rule 65    entire_variable -> variable_identifier
+Rule 66    variable_identifier -> ID
+Rule 67    component_variable -> field_designator
+Rule 68    field_designator -> field_designator_identifier
+Rule 69    field_designator_identifier -> ID
+Rule 70    expression -> shift_expression
+Rule 71    expression -> shift_expression relational_operator shift_expression
+Rule 72    relational_operator -> OPERATOR
+Rule 73    shift_expression -> simple_expression
+Rule 74    simple_expression -> term
+Rule 75    simple_expression -> term ADD term
+Rule 76    simple_expression -> term MUL term
+Rule 77    term -> factor
+Rule 78    term -> factor multiplying_operator factor
+Rule 79    factor -> sign unsigned_constant
+Rule 80    factor -> number
+Rule 81    factor -> variable_access
+Rule 82    factor -> LPAREN expression RPAREN
+Rule 83    factor -> NOT factor
+Rule 84    multiplying_operator -> MUL
+Rule 85    unsigned_constant -> number
+Rule 86    unsigned_constant -> real_number
+Rule 87    unsigned_constant -> constant_identifier
+Rule 88    constant_identifier -> ID
+Rule 89    conditional_statement -> if_statement
+Rule 90    if_statement -> IF boolean_expression THEN statement else_part
+Rule 91    boolean_expression -> expression
+Rule 92    else_part -> ELSE statement
+Rule 93    else_part -> empty_statement
+Rule 94    repetitive_statement -> while_statement
+Rule 95    while_statement -> WHILE boolean_expression DO statement
+Rule 96    write_parameter -> expression
+Rule 97    write_parameter -> expression COLON expression
+Rule 98    write_parameter -> expression COLON expression COLON expression
+Rule 99    write_parameter_list -> LPAREN write_parameter RPAREN
+Rule 100   write_parameter_list -> LPAREN STRING COMMA write_parameter RPAREN
+Rule 101   write_parameter_list -> LPAREN file_variable COMMA write_parameter RPAREN
+Rule 102   write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN
+Rule 103   read_parameter_list -> LPAREN variable_access RPAREN
+Rule 104   read_parameter_list -> LPAREN file_variable COMMA variable_access RPAREN
+Rule 105   read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN
+Rule 106   procedure_statement -> procedure_identifier read_parameter_list
+Rule 107   procedure_statement -> procedure_identifier write_parameter_list
+Rule 108   procedure_identifier -> ID
+
+Terminals, with rules where they appear
+
+ADD                  : 25 32 34 75
+ASSIGN               : 45 60
+BEGIN                : 47 48
+COLON                : 40 97 98 98
+COMMA                : 6 100 101 102 102 104 105 105
+CONST                : 19
+DO                   : 95
+ELSE                 : 92
+END                  : 48
+END_DOT              : 47
+EXPONENT             : 37
+ID                   : 7 21 42 45 66 69 88 108
+IF                   : 90
+LETTER               : 
+LPAREN               : 3 82 99 100 101 102 103 104 105
+MUL                  : 26 76 84
+NOT                  : 83
+NUMBER               : 10 11 30 31
+OPERATOR             : 21 72
+PROGRAM              : 2 3
+RPAREN               : 3 82 99 100 101 102 103 104 105
+SEMICOLON            : 1 19 20 38 39 43 44 48 50 59
+STRING               : 9 100
+THEN                 : 90
+TYPE                 : 43
+UNDERSCORE           : 8
+VAR                  : 38
+WHILE                : 95
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment_statement : 54
+assignment_statement_lhs : 60
+block                : 12
+boolean_expression   : 90 95
+component_variable   : 64
+compound_statement   : 46 56
+conditional_statement : 57
+constant             : 21
+constant_definition  : 19 20
+constant_definition_group : 16 20
+constant_identifier  : 87
+decimal_integer      : 27 28
+declaration_group    : 14 15
+declarative_part     : 13 15
+digit_sequence       : 29 31 32 33 34 35 36
+else_part            : 90
+empty_statement      : 53 93
+entire_variable      : 63
+exponent             : 33 34
+expression           : 60 82 91 96 97 97 98 98 98
+factor               : 77 78 78 83
+field_designator     : 67
+field_designator_identifier : 68
+file_variable        : 101 102 104 105
+fractional_part      : 32 34
+identifier           : 2 3 5 6 9 10
+identifier_list      : 4 6 40
+if_statement         : 89
+multiplying_operator : 78
+number               : 22 23 80 85
+procedure_identifier : 106 107
+procedure_statement  : 55
+program              : 0
+program_block        : 1
+program_heading      : 1
+program_parameter_list : 3
+read_parameter_list  : 106
+real_number          : 24 86
+relational_operator  : 71
+repetitive_statement : 58
+scale_factor         : 33 34
+shift_expression     : 70 71 71
+sign                 : 23 24 28 36 79
+simple_expression    : 73
+simple_statement     : 51
+statement            : 49 50 90 92 95
+statement_part       : 13
+statement_sequence   : 47 48 50
+structured_statement : 52
+term                 : 74 75 75 76 76
+type_definition      : 43 44
+type_definition_group : 17 44
+type_denoter         : 40 45
+type_identifier      : 41
+unsigned_constant    : 79
+variable_access      : 61 62 81 103 104 105 105
+variable_declaration : 38 39
+variable_declaration_group : 18 39
+variable_identifier  : 65
+while_statement      : 94
+write_parameter      : 99 100 101 102 102
+write_parameter_list : 107
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . program_heading SEMICOLON program_block
+    (2) program_heading -> . PROGRAM identifier
+    (3) program_heading -> . PROGRAM identifier LPAREN program_parameter_list RPAREN
+
+    PROGRAM         shift and go to state 3
+
+    program                        shift and go to state 1
+    program_heading                shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> program_heading . SEMICOLON program_block
+
+    SEMICOLON       shift and go to state 4
+
+
+state 3
+
+    (2) program_heading -> PROGRAM . identifier
+    (3) program_heading -> PROGRAM . identifier LPAREN program_parameter_list RPAREN
+    (7) identifier -> . ID
+    (8) identifier -> . UNDERSCORE
+    (9) identifier -> . identifier STRING
+    (10) identifier -> . identifier NUMBER
+    (11) identifier -> . NUMBER
+
+    ID              shift and go to state 6
+    UNDERSCORE      shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    identifier                     shift and go to state 5
+
+state 4
+
+    (1) program -> program_heading SEMICOLON . program_block
+    (12) program_block -> . block
+    (13) block -> . declarative_part statement_part
+    (14) declarative_part -> . declaration_group
+    (15) declarative_part -> . declarative_part declaration_group
+    (16) declaration_group -> . constant_definition_group
+    (17) declaration_group -> . type_definition_group
+    (18) declaration_group -> . variable_declaration_group
+    (19) constant_definition_group -> . CONST constant_definition SEMICOLON
+    (20) constant_definition_group -> . constant_definition_group constant_definition SEMICOLON
+    (43) type_definition_group -> . TYPE type_definition SEMICOLON
+    (44) type_definition_group -> . type_definition_group type_definition SEMICOLON
+    (38) variable_declaration_group -> . VAR variable_declaration SEMICOLON
+    (39) variable_declaration_group -> . variable_declaration_group variable_declaration SEMICOLON
+
+    CONST           shift and go to state 16
+    TYPE            shift and go to state 17
+    VAR             shift and go to state 18
+
+    program_block                  shift and go to state 9
+    block                          shift and go to state 10
+    declarative_part               shift and go to state 11
+    declaration_group              shift and go to state 12
+    constant_definition_group      shift and go to state 13
+    type_definition_group          shift and go to state 14
+    variable_declaration_group     shift and go to state 15
+
+state 5
+
+    (2) program_heading -> PROGRAM identifier .
+    (3) program_heading -> PROGRAM identifier . LPAREN program_parameter_list RPAREN
+    (9) identifier -> identifier . STRING
+    (10) identifier -> identifier . NUMBER
+
+    SEMICOLON       reduce using rule 2 (program_heading -> PROGRAM identifier .)
+    LPAREN          shift and go to state 19
+    STRING          shift and go to state 20
+    NUMBER          shift and go to state 21
+
+
+state 6
+
+    (7) identifier -> ID .
+
+    LPAREN          reduce using rule 7 (identifier -> ID .)
+    STRING          reduce using rule 7 (identifier -> ID .)
+    NUMBER          reduce using rule 7 (identifier -> ID .)
+    SEMICOLON       reduce using rule 7 (identifier -> ID .)
+    COLON           reduce using rule 7 (identifier -> ID .)
+    COMMA           reduce using rule 7 (identifier -> ID .)
+    RPAREN          reduce using rule 7 (identifier -> ID .)
+
+
+state 7
+
+    (8) identifier -> UNDERSCORE .
+
+    LPAREN          reduce using rule 8 (identifier -> UNDERSCORE .)
+    STRING          reduce using rule 8 (identifier -> UNDERSCORE .)
+    NUMBER          reduce using rule 8 (identifier -> UNDERSCORE .)
+    SEMICOLON       reduce using rule 8 (identifier -> UNDERSCORE .)
+    COLON           reduce using rule 8 (identifier -> UNDERSCORE .)
+    COMMA           reduce using rule 8 (identifier -> UNDERSCORE .)
+    RPAREN          reduce using rule 8 (identifier -> UNDERSCORE .)
+
+
+state 8
+
+    (11) identifier -> NUMBER .
+
+    LPAREN          reduce using rule 11 (identifier -> NUMBER .)
+    STRING          reduce using rule 11 (identifier -> NUMBER .)
+    NUMBER          reduce using rule 11 (identifier -> NUMBER .)
+    SEMICOLON       reduce using rule 11 (identifier -> NUMBER .)
+    COLON           reduce using rule 11 (identifier -> NUMBER .)
+    COMMA           reduce using rule 11 (identifier -> NUMBER .)
+    RPAREN          reduce using rule 11 (identifier -> NUMBER .)
+
+
+state 9
+
+    (1) program -> program_heading SEMICOLON program_block .
+
+    $end            reduce using rule 1 (program -> program_heading SEMICOLON program_block .)
+
+
+state 10
+
+    (12) program_block -> block .
+
+    $end            reduce using rule 12 (program_block -> block .)
+
+
+state 11
+
+    (13) block -> declarative_part . statement_part
+    (15) declarative_part -> declarative_part . declaration_group
+    (46) statement_part -> . compound_statement
+    (16) declaration_group -> . constant_definition_group
+    (17) declaration_group -> . type_definition_group
+    (18) declaration_group -> . variable_declaration_group
+    (47) compound_statement -> . BEGIN statement_sequence END_DOT
+    (48) compound_statement -> . BEGIN statement_sequence END SEMICOLON
+    (19) constant_definition_group -> . CONST constant_definition SEMICOLON
+    (20) constant_definition_group -> . constant_definition_group constant_definition SEMICOLON
+    (43) type_definition_group -> . TYPE type_definition SEMICOLON
+    (44) type_definition_group -> . type_definition_group type_definition SEMICOLON
+    (38) variable_declaration_group -> . VAR variable_declaration SEMICOLON
+    (39) variable_declaration_group -> . variable_declaration_group variable_declaration SEMICOLON
+
+    BEGIN           shift and go to state 25
+    CONST           shift and go to state 16
+    TYPE            shift and go to state 17
+    VAR             shift and go to state 18
+
+    statement_part                 shift and go to state 22
+    declaration_group              shift and go to state 23
+    compound_statement             shift and go to state 24
+    constant_definition_group      shift and go to state 13
+    type_definition_group          shift and go to state 14
+    variable_declaration_group     shift and go to state 15
+
+state 12
+
+    (14) declarative_part -> declaration_group .
+
+    BEGIN           reduce using rule 14 (declarative_part -> declaration_group .)
+    CONST           reduce using rule 14 (declarative_part -> declaration_group .)
+    TYPE            reduce using rule 14 (declarative_part -> declaration_group .)
+    VAR             reduce using rule 14 (declarative_part -> declaration_group .)
+
+
+state 13
+
+    (16) declaration_group -> constant_definition_group .
+    (20) constant_definition_group -> constant_definition_group . constant_definition SEMICOLON
+    (21) constant_definition -> . ID OPERATOR constant
+
+    BEGIN           reduce using rule 16 (declaration_group -> constant_definition_group .)
+    CONST           reduce using rule 16 (declaration_group -> constant_definition_group .)
+    TYPE            reduce using rule 16 (declaration_group -> constant_definition_group .)
+    VAR             reduce using rule 16 (declaration_group -> constant_definition_group .)
+    ID              shift and go to state 27
+
+    constant_definition            shift and go to state 26
+
+state 14
+
+    (17) declaration_group -> type_definition_group .
+    (44) type_definition_group -> type_definition_group . type_definition SEMICOLON
+    (45) type_definition -> . ID ASSIGN type_denoter
+
+    BEGIN           reduce using rule 17 (declaration_group -> type_definition_group .)
+    CONST           reduce using rule 17 (declaration_group -> type_definition_group .)
+    TYPE            reduce using rule 17 (declaration_group -> type_definition_group .)
+    VAR             reduce using rule 17 (declaration_group -> type_definition_group .)
+    ID              shift and go to state 29
+
+    type_definition                shift and go to state 28
+
+state 15
+
+    (18) declaration_group -> variable_declaration_group .
+    (39) variable_declaration_group -> variable_declaration_group . variable_declaration SEMICOLON
+    (40) variable_declaration -> . identifier_list COLON type_denoter
+    (5) identifier_list -> . identifier
+    (6) identifier_list -> . identifier_list COMMA identifier
+    (7) identifier -> . ID
+    (8) identifier -> . UNDERSCORE
+    (9) identifier -> . identifier STRING
+    (10) identifier -> . identifier NUMBER
+    (11) identifier -> . NUMBER
+
+    BEGIN           reduce using rule 18 (declaration_group -> variable_declaration_group .)
+    CONST           reduce using rule 18 (declaration_group -> variable_declaration_group .)
+    TYPE            reduce using rule 18 (declaration_group -> variable_declaration_group .)
+    VAR             reduce using rule 18 (declaration_group -> variable_declaration_group .)
+    ID              shift and go to state 6
+    UNDERSCORE      shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    variable_declaration           shift and go to state 30
+    identifier_list                shift and go to state 31
+    identifier                     shift and go to state 32
+
+state 16
+
+    (19) constant_definition_group -> CONST . constant_definition SEMICOLON
+    (21) constant_definition -> . ID OPERATOR constant
+
+    ID              shift and go to state 27
+
+    constant_definition            shift and go to state 33
+
+state 17
+
+    (43) type_definition_group -> TYPE . type_definition SEMICOLON
+    (45) type_definition -> . ID ASSIGN type_denoter
+
+    ID              shift and go to state 29
+
+    type_definition                shift and go to state 34
+
+state 18
+
+    (38) variable_declaration_group -> VAR . variable_declaration SEMICOLON
+    (40) variable_declaration -> . identifier_list COLON type_denoter
+    (5) identifier_list -> . identifier
+    (6) identifier_list -> . identifier_list COMMA identifier
+    (7) identifier -> . ID
+    (8) identifier -> . UNDERSCORE
+    (9) identifier -> . identifier STRING
+    (10) identifier -> . identifier NUMBER
+    (11) identifier -> . NUMBER
+
+    ID              shift and go to state 6
+    UNDERSCORE      shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    variable_declaration           shift and go to state 35
+    identifier_list                shift and go to state 31
+    identifier                     shift and go to state 32
+
+state 19
+
+    (3) program_heading -> PROGRAM identifier LPAREN . program_parameter_list RPAREN
+    (4) program_parameter_list -> . identifier_list
+    (5) identifier_list -> . identifier
+    (6) identifier_list -> . identifier_list COMMA identifier
+    (7) identifier -> . ID
+    (8) identifier -> . UNDERSCORE
+    (9) identifier -> . identifier STRING
+    (10) identifier -> . identifier NUMBER
+    (11) identifier -> . NUMBER
+
+    ID              shift and go to state 6
+    UNDERSCORE      shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    identifier                     shift and go to state 32
+    program_parameter_list         shift and go to state 36
+    identifier_list                shift and go to state 37
+
+state 20
+
+    (9) identifier -> identifier STRING .
+
+    LPAREN          reduce using rule 9 (identifier -> identifier STRING .)
+    STRING          reduce using rule 9 (identifier -> identifier STRING .)
+    NUMBER          reduce using rule 9 (identifier -> identifier STRING .)
+    SEMICOLON       reduce using rule 9 (identifier -> identifier STRING .)
+    COLON           reduce using rule 9 (identifier -> identifier STRING .)
+    COMMA           reduce using rule 9 (identifier -> identifier STRING .)
+    RPAREN          reduce using rule 9 (identifier -> identifier STRING .)
+
+
+state 21
+
+    (10) identifier -> identifier NUMBER .
+
+    LPAREN          reduce using rule 10 (identifier -> identifier NUMBER .)
+    STRING          reduce using rule 10 (identifier -> identifier NUMBER .)
+    NUMBER          reduce using rule 10 (identifier -> identifier NUMBER .)
+    SEMICOLON       reduce using rule 10 (identifier -> identifier NUMBER .)
+    COLON           reduce using rule 10 (identifier -> identifier NUMBER .)
+    COMMA           reduce using rule 10 (identifier -> identifier NUMBER .)
+    RPAREN          reduce using rule 10 (identifier -> identifier NUMBER .)
+
+
+state 22
+
+    (13) block -> declarative_part statement_part .
+
+    $end            reduce using rule 13 (block -> declarative_part statement_part .)
+
+
+state 23
+
+    (15) declarative_part -> declarative_part declaration_group .
+
+    BEGIN           reduce using rule 15 (declarative_part -> declarative_part declaration_group .)
+    CONST           reduce using rule 15 (declarative_part -> declarative_part declaration_group .)
+    TYPE            reduce using rule 15 (declarative_part -> declarative_part declaration_group .)
+    VAR             reduce using rule 15 (declarative_part -> declarative_part declaration_group .)
+
+
+state 24
+
+    (46) statement_part -> compound_statement .
+
+    $end            reduce using rule 46 (statement_part -> compound_statement .)
+
+
+state 25
+
+    (47) compound_statement -> BEGIN . statement_sequence END_DOT
+    (48) compound_statement -> BEGIN . statement_sequence END SEMICOLON
+    (49) statement_sequence -> . statement
+    (50) statement_sequence -> . statement_sequence SEMICOLON statement
+    (51) statement -> . simple_statement
+    (52) statement -> . structured_statement
+    (53) simple_statement -> . empty_statement
+    (54) simple_statement -> . assignment_statement
+    (55) simple_statement -> . procedure_statement
+    (56) structured_statement -> . compound_statement
+    (57) structured_statement -> . conditional_statement
+    (58) structured_statement -> . repetitive_statement
+    (59) empty_statement -> . SEMICOLON
+    (60) assignment_statement -> . assignment_statement_lhs ASSIGN expression
+    (106) procedure_statement -> . procedure_identifier read_parameter_list
+    (107) procedure_statement -> . procedure_identifier write_parameter_list
+    (47) compound_statement -> . BEGIN statement_sequence END_DOT
+    (48) compound_statement -> . BEGIN statement_sequence END SEMICOLON
+    (89) conditional_statement -> . if_statement
+    (94) repetitive_statement -> . while_statement
+    (61) assignment_statement_lhs -> . variable_access
+    (108) procedure_identifier -> . ID
+    (90) if_statement -> . IF boolean_expression THEN statement else_part
+    (95) while_statement -> . WHILE boolean_expression DO statement
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    SEMICOLON       shift and go to state 39
+    BEGIN           shift and go to state 25
+    ID              shift and go to state 54
+    IF              shift and go to state 55
+    WHILE           shift and go to state 56
+
+    statement_sequence             shift and go to state 38
+    statement                      shift and go to state 40
+    simple_statement               shift and go to state 41
+    structured_statement           shift and go to state 42
+    empty_statement                shift and go to state 43
+    assignment_statement           shift and go to state 44
+    procedure_statement            shift and go to state 45
+    compound_statement             shift and go to state 46
+    conditional_statement          shift and go to state 47
+    repetitive_statement           shift and go to state 48
+    assignment_statement_lhs       shift and go to state 49
+    procedure_identifier           shift and go to state 50
+    if_statement                   shift and go to state 51
+    while_statement                shift and go to state 52
+    variable_access                shift and go to state 53
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 26
+
+    (20) constant_definition_group -> constant_definition_group constant_definition . SEMICOLON
+
+    SEMICOLON       shift and go to state 62
+
+
+state 27
+
+    (21) constant_definition -> ID . OPERATOR constant
+
+    OPERATOR        shift and go to state 63
+
+
+state 28
+
+    (44) type_definition_group -> type_definition_group type_definition . SEMICOLON
+
+    SEMICOLON       shift and go to state 64
+
+
+state 29
+
+    (45) type_definition -> ID . ASSIGN type_denoter
+
+    ASSIGN          shift and go to state 65
+
+
+state 30
+
+    (39) variable_declaration_group -> variable_declaration_group variable_declaration . SEMICOLON
+
+    SEMICOLON       shift and go to state 66
+
+
+state 31
+
+    (40) variable_declaration -> identifier_list . COLON type_denoter
+    (6) identifier_list -> identifier_list . COMMA identifier
+
+    COLON           shift and go to state 67
+    COMMA           shift and go to state 68
+
+
+state 32
+
+    (5) identifier_list -> identifier .
+    (9) identifier -> identifier . STRING
+    (10) identifier -> identifier . NUMBER
+
+    COLON           reduce using rule 5 (identifier_list -> identifier .)
+    COMMA           reduce using rule 5 (identifier_list -> identifier .)
+    RPAREN          reduce using rule 5 (identifier_list -> identifier .)
+    STRING          shift and go to state 20
+    NUMBER          shift and go to state 21
+
+
+state 33
+
+    (19) constant_definition_group -> CONST constant_definition . SEMICOLON
+
+    SEMICOLON       shift and go to state 69
+
+
+state 34
+
+    (43) type_definition_group -> TYPE type_definition . SEMICOLON
+
+    SEMICOLON       shift and go to state 70
+
+
+state 35
+
+    (38) variable_declaration_group -> VAR variable_declaration . SEMICOLON
+
+    SEMICOLON       shift and go to state 71
+
+
+state 36
+
+    (3) program_heading -> PROGRAM identifier LPAREN program_parameter_list . RPAREN
+
+    RPAREN          shift and go to state 72
+
+
+state 37
+
+    (4) program_parameter_list -> identifier_list .
+    (6) identifier_list -> identifier_list . COMMA identifier
+
+    RPAREN          reduce using rule 4 (program_parameter_list -> identifier_list .)
+    COMMA           shift and go to state 68
+
+
+state 38
+
+    (47) compound_statement -> BEGIN statement_sequence . END_DOT
+    (48) compound_statement -> BEGIN statement_sequence . END SEMICOLON
+    (50) statement_sequence -> statement_sequence . SEMICOLON statement
+
+    END_DOT         shift and go to state 73
+    END             shift and go to state 74
+    SEMICOLON       shift and go to state 75
+
+
+state 39
+
+    (59) empty_statement -> SEMICOLON .
+
+    END_DOT         reduce using rule 59 (empty_statement -> SEMICOLON .)
+    END             reduce using rule 59 (empty_statement -> SEMICOLON .)
+    SEMICOLON       reduce using rule 59 (empty_statement -> SEMICOLON .)
+    ELSE            reduce using rule 59 (empty_statement -> SEMICOLON .)
+
+
+state 40
+
+    (49) statement_sequence -> statement .
+
+    END_DOT         reduce using rule 49 (statement_sequence -> statement .)
+    END             reduce using rule 49 (statement_sequence -> statement .)
+    SEMICOLON       reduce using rule 49 (statement_sequence -> statement .)
+
+
+state 41
+
+    (51) statement -> simple_statement .
+
+    END_DOT         reduce using rule 51 (statement -> simple_statement .)
+    END             reduce using rule 51 (statement -> simple_statement .)
+    SEMICOLON       reduce using rule 51 (statement -> simple_statement .)
+    ELSE            reduce using rule 51 (statement -> simple_statement .)
+
+
+state 42
+
+    (52) statement -> structured_statement .
+
+    END_DOT         reduce using rule 52 (statement -> structured_statement .)
+    END             reduce using rule 52 (statement -> structured_statement .)
+    SEMICOLON       reduce using rule 52 (statement -> structured_statement .)
+    ELSE            reduce using rule 52 (statement -> structured_statement .)
+
+
+state 43
+
+    (53) simple_statement -> empty_statement .
+
+    END_DOT         reduce using rule 53 (simple_statement -> empty_statement .)
+    END             reduce using rule 53 (simple_statement -> empty_statement .)
+    SEMICOLON       reduce using rule 53 (simple_statement -> empty_statement .)
+    ELSE            reduce using rule 53 (simple_statement -> empty_statement .)
+
+
+state 44
+
+    (54) simple_statement -> assignment_statement .
+
+    END_DOT         reduce using rule 54 (simple_statement -> assignment_statement .)
+    END             reduce using rule 54 (simple_statement -> assignment_statement .)
+    SEMICOLON       reduce using rule 54 (simple_statement -> assignment_statement .)
+    ELSE            reduce using rule 54 (simple_statement -> assignment_statement .)
+
+
+state 45
+
+    (55) simple_statement -> procedure_statement .
+
+    END_DOT         reduce using rule 55 (simple_statement -> procedure_statement .)
+    END             reduce using rule 55 (simple_statement -> procedure_statement .)
+    SEMICOLON       reduce using rule 55 (simple_statement -> procedure_statement .)
+    ELSE            reduce using rule 55 (simple_statement -> procedure_statement .)
+
+
+state 46
+
+    (56) structured_statement -> compound_statement .
+
+    END_DOT         reduce using rule 56 (structured_statement -> compound_statement .)
+    END             reduce using rule 56 (structured_statement -> compound_statement .)
+    SEMICOLON       reduce using rule 56 (structured_statement -> compound_statement .)
+    ELSE            reduce using rule 56 (structured_statement -> compound_statement .)
+
+
+state 47
+
+    (57) structured_statement -> conditional_statement .
+
+    END_DOT         reduce using rule 57 (structured_statement -> conditional_statement .)
+    END             reduce using rule 57 (structured_statement -> conditional_statement .)
+    SEMICOLON       reduce using rule 57 (structured_statement -> conditional_statement .)
+    ELSE            reduce using rule 57 (structured_statement -> conditional_statement .)
+
+
+state 48
+
+    (58) structured_statement -> repetitive_statement .
+
+    END_DOT         reduce using rule 58 (structured_statement -> repetitive_statement .)
+    END             reduce using rule 58 (structured_statement -> repetitive_statement .)
+    SEMICOLON       reduce using rule 58 (structured_statement -> repetitive_statement .)
+    ELSE            reduce using rule 58 (structured_statement -> repetitive_statement .)
+
+
+state 49
+
+    (60) assignment_statement -> assignment_statement_lhs . ASSIGN expression
+
+    ASSIGN          shift and go to state 76
+
+
+state 50
+
+    (106) procedure_statement -> procedure_identifier . read_parameter_list
+    (107) procedure_statement -> procedure_identifier . write_parameter_list
+    (103) read_parameter_list -> . LPAREN variable_access RPAREN
+    (104) read_parameter_list -> . LPAREN file_variable COMMA variable_access RPAREN
+    (105) read_parameter_list -> . LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN
+    (99) write_parameter_list -> . LPAREN write_parameter RPAREN
+    (100) write_parameter_list -> . LPAREN STRING COMMA write_parameter RPAREN
+    (101) write_parameter_list -> . LPAREN file_variable COMMA write_parameter RPAREN
+    (102) write_parameter_list -> . LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN
+
+    LPAREN          shift and go to state 79
+
+    read_parameter_list            shift and go to state 77
+    write_parameter_list           shift and go to state 78
+
+state 51
+
+    (89) conditional_statement -> if_statement .
+
+    END_DOT         reduce using rule 89 (conditional_statement -> if_statement .)
+    END             reduce using rule 89 (conditional_statement -> if_statement .)
+    SEMICOLON       reduce using rule 89 (conditional_statement -> if_statement .)
+    ELSE            reduce using rule 89 (conditional_statement -> if_statement .)
+
+
+state 52
+
+    (94) repetitive_statement -> while_statement .
+
+    END_DOT         reduce using rule 94 (repetitive_statement -> while_statement .)
+    END             reduce using rule 94 (repetitive_statement -> while_statement .)
+    SEMICOLON       reduce using rule 94 (repetitive_statement -> while_statement .)
+    ELSE            reduce using rule 94 (repetitive_statement -> while_statement .)
+
+
+state 53
+
+    (61) assignment_statement_lhs -> variable_access .
+
+    ASSIGN          reduce using rule 61 (assignment_statement_lhs -> variable_access .)
+
+
+state 54
+
+    (108) procedure_identifier -> ID .
+    (66) variable_identifier -> ID .
+    (69) field_designator_identifier -> ID .
+
+  ! reduce/reduce conflict for ASSIGN resolved using rule 66 (variable_identifier -> ID .)
+    LPAREN          reduce using rule 108 (procedure_identifier -> ID .)
+    ASSIGN          reduce using rule 66 (variable_identifier -> ID .)
+
+  ! ASSIGN          [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+
+
+state 55
+
+    (90) if_statement -> IF . boolean_expression THEN statement else_part
+    (91) boolean_expression -> . expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    boolean_expression             shift and go to state 80
+    expression                     shift and go to state 81
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 56
+
+    (95) while_statement -> WHILE . boolean_expression DO statement
+    (91) boolean_expression -> . expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    boolean_expression             shift and go to state 97
+    expression                     shift and go to state 81
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 57
+
+    (63) variable_access -> entire_variable .
+
+    ASSIGN          reduce using rule 63 (variable_access -> entire_variable .)
+    MUL             reduce using rule 63 (variable_access -> entire_variable .)
+    ADD             reduce using rule 63 (variable_access -> entire_variable .)
+    OPERATOR        reduce using rule 63 (variable_access -> entire_variable .)
+    THEN            reduce using rule 63 (variable_access -> entire_variable .)
+    DO              reduce using rule 63 (variable_access -> entire_variable .)
+    END_DOT         reduce using rule 63 (variable_access -> entire_variable .)
+    END             reduce using rule 63 (variable_access -> entire_variable .)
+    SEMICOLON       reduce using rule 63 (variable_access -> entire_variable .)
+    ELSE            reduce using rule 63 (variable_access -> entire_variable .)
+    RPAREN          reduce using rule 63 (variable_access -> entire_variable .)
+    COMMA           reduce using rule 63 (variable_access -> entire_variable .)
+    COLON           reduce using rule 63 (variable_access -> entire_variable .)
+
+
+state 58
+
+    (64) variable_access -> component_variable .
+
+    ASSIGN          reduce using rule 64 (variable_access -> component_variable .)
+    MUL             reduce using rule 64 (variable_access -> component_variable .)
+    ADD             reduce using rule 64 (variable_access -> component_variable .)
+    OPERATOR        reduce using rule 64 (variable_access -> component_variable .)
+    THEN            reduce using rule 64 (variable_access -> component_variable .)
+    DO              reduce using rule 64 (variable_access -> component_variable .)
+    END_DOT         reduce using rule 64 (variable_access -> component_variable .)
+    END             reduce using rule 64 (variable_access -> component_variable .)
+    SEMICOLON       reduce using rule 64 (variable_access -> component_variable .)
+    ELSE            reduce using rule 64 (variable_access -> component_variable .)
+    RPAREN          reduce using rule 64 (variable_access -> component_variable .)
+    COMMA           reduce using rule 64 (variable_access -> component_variable .)
+    COLON           reduce using rule 64 (variable_access -> component_variable .)
+
+
+state 59
+
+    (65) entire_variable -> variable_identifier .
+
+    ASSIGN          reduce using rule 65 (entire_variable -> variable_identifier .)
+    MUL             reduce using rule 65 (entire_variable -> variable_identifier .)
+    ADD             reduce using rule 65 (entire_variable -> variable_identifier .)
+    OPERATOR        reduce using rule 65 (entire_variable -> variable_identifier .)
+    THEN            reduce using rule 65 (entire_variable -> variable_identifier .)
+    DO              reduce using rule 65 (entire_variable -> variable_identifier .)
+    END_DOT         reduce using rule 65 (entire_variable -> variable_identifier .)
+    END             reduce using rule 65 (entire_variable -> variable_identifier .)
+    SEMICOLON       reduce using rule 65 (entire_variable -> variable_identifier .)
+    ELSE            reduce using rule 65 (entire_variable -> variable_identifier .)
+    RPAREN          reduce using rule 65 (entire_variable -> variable_identifier .)
+    COMMA           reduce using rule 65 (entire_variable -> variable_identifier .)
+    COLON           reduce using rule 65 (entire_variable -> variable_identifier .)
+
+
+state 60
+
+    (67) component_variable -> field_designator .
+
+    ASSIGN          reduce using rule 67 (component_variable -> field_designator .)
+    MUL             reduce using rule 67 (component_variable -> field_designator .)
+    ADD             reduce using rule 67 (component_variable -> field_designator .)
+    OPERATOR        reduce using rule 67 (component_variable -> field_designator .)
+    THEN            reduce using rule 67 (component_variable -> field_designator .)
+    DO              reduce using rule 67 (component_variable -> field_designator .)
+    END_DOT         reduce using rule 67 (component_variable -> field_designator .)
+    END             reduce using rule 67 (component_variable -> field_designator .)
+    SEMICOLON       reduce using rule 67 (component_variable -> field_designator .)
+    ELSE            reduce using rule 67 (component_variable -> field_designator .)
+    RPAREN          reduce using rule 67 (component_variable -> field_designator .)
+    COMMA           reduce using rule 67 (component_variable -> field_designator .)
+    COLON           reduce using rule 67 (component_variable -> field_designator .)
+
+
+state 61
+
+    (68) field_designator -> field_designator_identifier .
+
+    ASSIGN          reduce using rule 68 (field_designator -> field_designator_identifier .)
+    MUL             reduce using rule 68 (field_designator -> field_designator_identifier .)
+    ADD             reduce using rule 68 (field_designator -> field_designator_identifier .)
+    OPERATOR        reduce using rule 68 (field_designator -> field_designator_identifier .)
+    THEN            reduce using rule 68 (field_designator -> field_designator_identifier .)
+    DO              reduce using rule 68 (field_designator -> field_designator_identifier .)
+    END_DOT         reduce using rule 68 (field_designator -> field_designator_identifier .)
+    END             reduce using rule 68 (field_designator -> field_designator_identifier .)
+    SEMICOLON       reduce using rule 68 (field_designator -> field_designator_identifier .)
+    ELSE            reduce using rule 68 (field_designator -> field_designator_identifier .)
+    RPAREN          reduce using rule 68 (field_designator -> field_designator_identifier .)
+    COMMA           reduce using rule 68 (field_designator -> field_designator_identifier .)
+    COLON           reduce using rule 68 (field_designator -> field_designator_identifier .)
+
+
+state 62
+
+    (20) constant_definition_group -> constant_definition_group constant_definition SEMICOLON .
+
+    ID              reduce using rule 20 (constant_definition_group -> constant_definition_group constant_definition SEMICOLON .)
+    BEGIN           reduce using rule 20 (constant_definition_group -> constant_definition_group constant_definition SEMICOLON .)
+    CONST           reduce using rule 20 (constant_definition_group -> constant_definition_group constant_definition SEMICOLON .)
+    TYPE            reduce using rule 20 (constant_definition_group -> constant_definition_group constant_definition SEMICOLON .)
+    VAR             reduce using rule 20 (constant_definition_group -> constant_definition_group constant_definition SEMICOLON .)
+
+
+state 63
+
+    (21) constant_definition -> ID OPERATOR . constant
+    (22) constant -> . number
+    (23) constant -> . sign number
+    (24) constant -> . sign real_number
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (29) decimal_integer -> . digit_sequence
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+
+    constant                       shift and go to state 98
+    number                         shift and go to state 99
+    sign                           shift and go to state 100
+    decimal_integer                shift and go to state 93
+    digit_sequence                 shift and go to state 94
+
+state 64
+
+    (44) type_definition_group -> type_definition_group type_definition SEMICOLON .
+
+    ID              reduce using rule 44 (type_definition_group -> type_definition_group type_definition SEMICOLON .)
+    BEGIN           reduce using rule 44 (type_definition_group -> type_definition_group type_definition SEMICOLON .)
+    CONST           reduce using rule 44 (type_definition_group -> type_definition_group type_definition SEMICOLON .)
+    TYPE            reduce using rule 44 (type_definition_group -> type_definition_group type_definition SEMICOLON .)
+    VAR             reduce using rule 44 (type_definition_group -> type_definition_group type_definition SEMICOLON .)
+
+
+state 65
+
+    (45) type_definition -> ID ASSIGN . type_denoter
+    (41) type_denoter -> . type_identifier
+    (42) type_identifier -> . ID
+
+    ID              shift and go to state 101
+
+    type_denoter                   shift and go to state 102
+    type_identifier                shift and go to state 103
+
+state 66
+
+    (39) variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .
+
+    ID              reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+    UNDERSCORE      reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+    NUMBER          reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+    BEGIN           reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+    CONST           reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+    TYPE            reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+    VAR             reduce using rule 39 (variable_declaration_group -> variable_declaration_group variable_declaration SEMICOLON .)
+
+
+state 67
+
+    (40) variable_declaration -> identifier_list COLON . type_denoter
+    (41) type_denoter -> . type_identifier
+    (42) type_identifier -> . ID
+
+    ID              shift and go to state 101
+
+    type_denoter                   shift and go to state 104
+    type_identifier                shift and go to state 103
+
+state 68
+
+    (6) identifier_list -> identifier_list COMMA . identifier
+    (7) identifier -> . ID
+    (8) identifier -> . UNDERSCORE
+    (9) identifier -> . identifier STRING
+    (10) identifier -> . identifier NUMBER
+    (11) identifier -> . NUMBER
+
+    ID              shift and go to state 6
+    UNDERSCORE      shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    identifier                     shift and go to state 105
+
+state 69
+
+    (19) constant_definition_group -> CONST constant_definition SEMICOLON .
+
+    ID              reduce using rule 19 (constant_definition_group -> CONST constant_definition SEMICOLON .)
+    BEGIN           reduce using rule 19 (constant_definition_group -> CONST constant_definition SEMICOLON .)
+    CONST           reduce using rule 19 (constant_definition_group -> CONST constant_definition SEMICOLON .)
+    TYPE            reduce using rule 19 (constant_definition_group -> CONST constant_definition SEMICOLON .)
+    VAR             reduce using rule 19 (constant_definition_group -> CONST constant_definition SEMICOLON .)
+
+
+state 70
+
+    (43) type_definition_group -> TYPE type_definition SEMICOLON .
+
+    ID              reduce using rule 43 (type_definition_group -> TYPE type_definition SEMICOLON .)
+    BEGIN           reduce using rule 43 (type_definition_group -> TYPE type_definition SEMICOLON .)
+    CONST           reduce using rule 43 (type_definition_group -> TYPE type_definition SEMICOLON .)
+    TYPE            reduce using rule 43 (type_definition_group -> TYPE type_definition SEMICOLON .)
+    VAR             reduce using rule 43 (type_definition_group -> TYPE type_definition SEMICOLON .)
+
+
+state 71
+
+    (38) variable_declaration_group -> VAR variable_declaration SEMICOLON .
+
+    ID              reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+    UNDERSCORE      reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+    NUMBER          reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+    BEGIN           reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+    CONST           reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+    TYPE            reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+    VAR             reduce using rule 38 (variable_declaration_group -> VAR variable_declaration SEMICOLON .)
+
+
+state 72
+
+    (3) program_heading -> PROGRAM identifier LPAREN program_parameter_list RPAREN .
+
+    SEMICOLON       reduce using rule 3 (program_heading -> PROGRAM identifier LPAREN program_parameter_list RPAREN .)
+
+
+state 73
+
+    (47) compound_statement -> BEGIN statement_sequence END_DOT .
+
+    $end            reduce using rule 47 (compound_statement -> BEGIN statement_sequence END_DOT .)
+    END_DOT         reduce using rule 47 (compound_statement -> BEGIN statement_sequence END_DOT .)
+    END             reduce using rule 47 (compound_statement -> BEGIN statement_sequence END_DOT .)
+    SEMICOLON       reduce using rule 47 (compound_statement -> BEGIN statement_sequence END_DOT .)
+    ELSE            reduce using rule 47 (compound_statement -> BEGIN statement_sequence END_DOT .)
+
+
+state 74
+
+    (48) compound_statement -> BEGIN statement_sequence END . SEMICOLON
+
+    SEMICOLON       shift and go to state 106
+
+
+state 75
+
+    (50) statement_sequence -> statement_sequence SEMICOLON . statement
+    (51) statement -> . simple_statement
+    (52) statement -> . structured_statement
+    (53) simple_statement -> . empty_statement
+    (54) simple_statement -> . assignment_statement
+    (55) simple_statement -> . procedure_statement
+    (56) structured_statement -> . compound_statement
+    (57) structured_statement -> . conditional_statement
+    (58) structured_statement -> . repetitive_statement
+    (59) empty_statement -> . SEMICOLON
+    (60) assignment_statement -> . assignment_statement_lhs ASSIGN expression
+    (106) procedure_statement -> . procedure_identifier read_parameter_list
+    (107) procedure_statement -> . procedure_identifier write_parameter_list
+    (47) compound_statement -> . BEGIN statement_sequence END_DOT
+    (48) compound_statement -> . BEGIN statement_sequence END SEMICOLON
+    (89) conditional_statement -> . if_statement
+    (94) repetitive_statement -> . while_statement
+    (61) assignment_statement_lhs -> . variable_access
+    (108) procedure_identifier -> . ID
+    (90) if_statement -> . IF boolean_expression THEN statement else_part
+    (95) while_statement -> . WHILE boolean_expression DO statement
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    SEMICOLON       shift and go to state 39
+    BEGIN           shift and go to state 25
+    ID              shift and go to state 54
+    IF              shift and go to state 55
+    WHILE           shift and go to state 56
+
+    statement                      shift and go to state 107
+    simple_statement               shift and go to state 41
+    structured_statement           shift and go to state 42
+    empty_statement                shift and go to state 43
+    assignment_statement           shift and go to state 44
+    procedure_statement            shift and go to state 45
+    compound_statement             shift and go to state 46
+    conditional_statement          shift and go to state 47
+    repetitive_statement           shift and go to state 48
+    assignment_statement_lhs       shift and go to state 49
+    procedure_identifier           shift and go to state 50
+    if_statement                   shift and go to state 51
+    while_statement                shift and go to state 52
+    variable_access                shift and go to state 53
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 76
+
+    (60) assignment_statement -> assignment_statement_lhs ASSIGN . expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    expression                     shift and go to state 108
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 77
+
+    (106) procedure_statement -> procedure_identifier read_parameter_list .
+
+    END_DOT         reduce using rule 106 (procedure_statement -> procedure_identifier read_parameter_list .)
+    END             reduce using rule 106 (procedure_statement -> procedure_identifier read_parameter_list .)
+    SEMICOLON       reduce using rule 106 (procedure_statement -> procedure_identifier read_parameter_list .)
+    ELSE            reduce using rule 106 (procedure_statement -> procedure_identifier read_parameter_list .)
+
+
+state 78
+
+    (107) procedure_statement -> procedure_identifier write_parameter_list .
+
+    END_DOT         reduce using rule 107 (procedure_statement -> procedure_identifier write_parameter_list .)
+    END             reduce using rule 107 (procedure_statement -> procedure_identifier write_parameter_list .)
+    SEMICOLON       reduce using rule 107 (procedure_statement -> procedure_identifier write_parameter_list .)
+    ELSE            reduce using rule 107 (procedure_statement -> procedure_identifier write_parameter_list .)
+
+
+state 79
+
+    (103) read_parameter_list -> LPAREN . variable_access RPAREN
+    (104) read_parameter_list -> LPAREN . file_variable COMMA variable_access RPAREN
+    (105) read_parameter_list -> LPAREN . file_variable COMMA variable_access COMMA variable_access RPAREN
+    (99) write_parameter_list -> LPAREN . write_parameter RPAREN
+    (100) write_parameter_list -> LPAREN . STRING COMMA write_parameter RPAREN
+    (101) write_parameter_list -> LPAREN . file_variable COMMA write_parameter RPAREN
+    (102) write_parameter_list -> LPAREN . file_variable COMMA write_parameter COMMA write_parameter RPAREN
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (62) file_variable -> . variable_access
+    (96) write_parameter -> . expression
+    (97) write_parameter -> . expression COLON expression
+    (98) write_parameter -> . expression COLON expression COLON expression
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (73) shift_expression -> . simple_expression
+    (69) field_designator_identifier -> . ID
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (29) decimal_integer -> . digit_sequence
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    STRING          shift and go to state 112
+    ID              shift and go to state 96
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+
+    variable_access                shift and go to state 109
+    file_variable                  shift and go to state 110
+    write_parameter                shift and go to state 111
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    expression                     shift and go to state 113
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    shift_expression               shift and go to state 82
+    field_designator_identifier    shift and go to state 61
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    decimal_integer                shift and go to state 93
+    digit_sequence                 shift and go to state 94
+
+state 80
+
+    (90) if_statement -> IF boolean_expression . THEN statement else_part
+
+    THEN            shift and go to state 114
+
+
+state 81
+
+    (91) boolean_expression -> expression .
+
+    THEN            reduce using rule 91 (boolean_expression -> expression .)
+    DO              reduce using rule 91 (boolean_expression -> expression .)
+
+
+state 82
+
+    (70) expression -> shift_expression .
+    (71) expression -> shift_expression . relational_operator shift_expression
+    (72) relational_operator -> . OPERATOR
+
+    THEN            reduce using rule 70 (expression -> shift_expression .)
+    DO              reduce using rule 70 (expression -> shift_expression .)
+    END_DOT         reduce using rule 70 (expression -> shift_expression .)
+    END             reduce using rule 70 (expression -> shift_expression .)
+    SEMICOLON       reduce using rule 70 (expression -> shift_expression .)
+    ELSE            reduce using rule 70 (expression -> shift_expression .)
+    COLON           reduce using rule 70 (expression -> shift_expression .)
+    RPAREN          reduce using rule 70 (expression -> shift_expression .)
+    COMMA           reduce using rule 70 (expression -> shift_expression .)
+    OPERATOR        shift and go to state 116
+
+    relational_operator            shift and go to state 115
+
+state 83
+
+    (73) shift_expression -> simple_expression .
+
+    OPERATOR        reduce using rule 73 (shift_expression -> simple_expression .)
+    THEN            reduce using rule 73 (shift_expression -> simple_expression .)
+    DO              reduce using rule 73 (shift_expression -> simple_expression .)
+    END_DOT         reduce using rule 73 (shift_expression -> simple_expression .)
+    END             reduce using rule 73 (shift_expression -> simple_expression .)
+    SEMICOLON       reduce using rule 73 (shift_expression -> simple_expression .)
+    ELSE            reduce using rule 73 (shift_expression -> simple_expression .)
+    COLON           reduce using rule 73 (shift_expression -> simple_expression .)
+    RPAREN          reduce using rule 73 (shift_expression -> simple_expression .)
+    COMMA           reduce using rule 73 (shift_expression -> simple_expression .)
+
+
+state 84
+
+    (74) simple_expression -> term .
+    (75) simple_expression -> term . ADD term
+    (76) simple_expression -> term . MUL term
+
+    OPERATOR        reduce using rule 74 (simple_expression -> term .)
+    THEN            reduce using rule 74 (simple_expression -> term .)
+    DO              reduce using rule 74 (simple_expression -> term .)
+    END_DOT         reduce using rule 74 (simple_expression -> term .)
+    END             reduce using rule 74 (simple_expression -> term .)
+    SEMICOLON       reduce using rule 74 (simple_expression -> term .)
+    ELSE            reduce using rule 74 (simple_expression -> term .)
+    COLON           reduce using rule 74 (simple_expression -> term .)
+    RPAREN          reduce using rule 74 (simple_expression -> term .)
+    COMMA           reduce using rule 74 (simple_expression -> term .)
+    ADD             shift and go to state 117
+    MUL             shift and go to state 118
+
+
+state 85
+
+    (25) sign -> ADD .
+
+    ID              reduce using rule 25 (sign -> ADD .)
+    NUMBER          reduce using rule 25 (sign -> ADD .)
+    ADD             reduce using rule 25 (sign -> ADD .)
+    MUL             reduce using rule 25 (sign -> ADD .)
+
+
+state 86
+
+    (26) sign -> MUL .
+
+    ID              reduce using rule 26 (sign -> MUL .)
+    NUMBER          reduce using rule 26 (sign -> MUL .)
+    ADD             reduce using rule 26 (sign -> MUL .)
+    MUL             reduce using rule 26 (sign -> MUL .)
+
+
+state 87
+
+    (77) term -> factor .
+    (78) term -> factor . multiplying_operator factor
+    (84) multiplying_operator -> . MUL
+
+  ! shift/reduce conflict for MUL resolved as shift
+    ADD             reduce using rule 77 (term -> factor .)
+    OPERATOR        reduce using rule 77 (term -> factor .)
+    THEN            reduce using rule 77 (term -> factor .)
+    DO              reduce using rule 77 (term -> factor .)
+    END_DOT         reduce using rule 77 (term -> factor .)
+    END             reduce using rule 77 (term -> factor .)
+    SEMICOLON       reduce using rule 77 (term -> factor .)
+    ELSE            reduce using rule 77 (term -> factor .)
+    COLON           reduce using rule 77 (term -> factor .)
+    RPAREN          reduce using rule 77 (term -> factor .)
+    COMMA           reduce using rule 77 (term -> factor .)
+    MUL             shift and go to state 120
+
+  ! MUL             [ reduce using rule 77 (term -> factor .) ]
+
+    multiplying_operator           shift and go to state 119
+
+state 88
+
+    (79) factor -> sign . unsigned_constant
+    (28) number -> sign . decimal_integer
+    (85) unsigned_constant -> . number
+    (86) unsigned_constant -> . real_number
+    (87) unsigned_constant -> . constant_identifier
+    (29) decimal_integer -> . digit_sequence
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (32) real_number -> . digit_sequence ADD fractional_part
+    (33) real_number -> . digit_sequence exponent scale_factor
+    (34) real_number -> . digit_sequence ADD fractional_part exponent scale_factor
+    (88) constant_identifier -> . ID
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+
+    ID              shift and go to state 128
+    NUMBER          shift and go to state 95
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+
+    sign                           shift and go to state 121
+    unsigned_constant              shift and go to state 122
+    decimal_integer                shift and go to state 123
+    number                         shift and go to state 124
+    real_number                    shift and go to state 125
+    constant_identifier            shift and go to state 126
+    digit_sequence                 shift and go to state 127
+
+state 89
+
+    (80) factor -> number .
+
+    MUL             reduce using rule 80 (factor -> number .)
+    ADD             reduce using rule 80 (factor -> number .)
+    OPERATOR        reduce using rule 80 (factor -> number .)
+    THEN            reduce using rule 80 (factor -> number .)
+    DO              reduce using rule 80 (factor -> number .)
+    END_DOT         reduce using rule 80 (factor -> number .)
+    END             reduce using rule 80 (factor -> number .)
+    SEMICOLON       reduce using rule 80 (factor -> number .)
+    ELSE            reduce using rule 80 (factor -> number .)
+    COLON           reduce using rule 80 (factor -> number .)
+    RPAREN          reduce using rule 80 (factor -> number .)
+    COMMA           reduce using rule 80 (factor -> number .)
+
+
+state 90
+
+    (81) factor -> variable_access .
+
+    MUL             reduce using rule 81 (factor -> variable_access .)
+    ADD             reduce using rule 81 (factor -> variable_access .)
+    OPERATOR        reduce using rule 81 (factor -> variable_access .)
+    THEN            reduce using rule 81 (factor -> variable_access .)
+    DO              reduce using rule 81 (factor -> variable_access .)
+    END_DOT         reduce using rule 81 (factor -> variable_access .)
+    END             reduce using rule 81 (factor -> variable_access .)
+    SEMICOLON       reduce using rule 81 (factor -> variable_access .)
+    ELSE            reduce using rule 81 (factor -> variable_access .)
+    RPAREN          reduce using rule 81 (factor -> variable_access .)
+    COLON           reduce using rule 81 (factor -> variable_access .)
+    COMMA           reduce using rule 81 (factor -> variable_access .)
+
+
+state 91
+
+    (82) factor -> LPAREN . expression RPAREN
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    expression                     shift and go to state 129
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 92
+
+    (83) factor -> NOT . factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    factor                         shift and go to state 130
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 93
+
+    (27) number -> decimal_integer .
+
+    MUL             reduce using rule 27 (number -> decimal_integer .)
+    ADD             reduce using rule 27 (number -> decimal_integer .)
+    OPERATOR        reduce using rule 27 (number -> decimal_integer .)
+    THEN            reduce using rule 27 (number -> decimal_integer .)
+    DO              reduce using rule 27 (number -> decimal_integer .)
+    SEMICOLON       reduce using rule 27 (number -> decimal_integer .)
+    END_DOT         reduce using rule 27 (number -> decimal_integer .)
+    END             reduce using rule 27 (number -> decimal_integer .)
+    ELSE            reduce using rule 27 (number -> decimal_integer .)
+    COLON           reduce using rule 27 (number -> decimal_integer .)
+    RPAREN          reduce using rule 27 (number -> decimal_integer .)
+    COMMA           reduce using rule 27 (number -> decimal_integer .)
+
+
+state 94
+
+    (29) decimal_integer -> digit_sequence .
+    (31) digit_sequence -> digit_sequence . NUMBER
+
+    MUL             reduce using rule 29 (decimal_integer -> digit_sequence .)
+    ADD             reduce using rule 29 (decimal_integer -> digit_sequence .)
+    OPERATOR        reduce using rule 29 (decimal_integer -> digit_sequence .)
+    THEN            reduce using rule 29 (decimal_integer -> digit_sequence .)
+    DO              reduce using rule 29 (decimal_integer -> digit_sequence .)
+    SEMICOLON       reduce using rule 29 (decimal_integer -> digit_sequence .)
+    END_DOT         reduce using rule 29 (decimal_integer -> digit_sequence .)
+    END             reduce using rule 29 (decimal_integer -> digit_sequence .)
+    ELSE            reduce using rule 29 (decimal_integer -> digit_sequence .)
+    COLON           reduce using rule 29 (decimal_integer -> digit_sequence .)
+    RPAREN          reduce using rule 29 (decimal_integer -> digit_sequence .)
+    COMMA           reduce using rule 29 (decimal_integer -> digit_sequence .)
+    NUMBER          shift and go to state 131
+
+
+state 95
+
+    (30) digit_sequence -> NUMBER .
+
+    NUMBER          reduce using rule 30 (digit_sequence -> NUMBER .)
+    MUL             reduce using rule 30 (digit_sequence -> NUMBER .)
+    ADD             reduce using rule 30 (digit_sequence -> NUMBER .)
+    OPERATOR        reduce using rule 30 (digit_sequence -> NUMBER .)
+    THEN            reduce using rule 30 (digit_sequence -> NUMBER .)
+    DO              reduce using rule 30 (digit_sequence -> NUMBER .)
+    SEMICOLON       reduce using rule 30 (digit_sequence -> NUMBER .)
+    END_DOT         reduce using rule 30 (digit_sequence -> NUMBER .)
+    END             reduce using rule 30 (digit_sequence -> NUMBER .)
+    ELSE            reduce using rule 30 (digit_sequence -> NUMBER .)
+    COLON           reduce using rule 30 (digit_sequence -> NUMBER .)
+    RPAREN          reduce using rule 30 (digit_sequence -> NUMBER .)
+    EXPONENT        reduce using rule 30 (digit_sequence -> NUMBER .)
+    COMMA           reduce using rule 30 (digit_sequence -> NUMBER .)
+
+
+state 96
+
+    (66) variable_identifier -> ID .
+    (69) field_designator_identifier -> ID .
+
+  ! reduce/reduce conflict for MUL resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for ADD resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for OPERATOR resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for THEN resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for DO resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for END_DOT resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for END resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for ELSE resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for COMMA resolved using rule 66 (variable_identifier -> ID .)
+  ! reduce/reduce conflict for COLON resolved using rule 66 (variable_identifier -> ID .)
+    MUL             reduce using rule 66 (variable_identifier -> ID .)
+    ADD             reduce using rule 66 (variable_identifier -> ID .)
+    OPERATOR        reduce using rule 66 (variable_identifier -> ID .)
+    THEN            reduce using rule 66 (variable_identifier -> ID .)
+    DO              reduce using rule 66 (variable_identifier -> ID .)
+    END_DOT         reduce using rule 66 (variable_identifier -> ID .)
+    END             reduce using rule 66 (variable_identifier -> ID .)
+    SEMICOLON       reduce using rule 66 (variable_identifier -> ID .)
+    ELSE            reduce using rule 66 (variable_identifier -> ID .)
+    RPAREN          reduce using rule 66 (variable_identifier -> ID .)
+    COMMA           reduce using rule 66 (variable_identifier -> ID .)
+    COLON           reduce using rule 66 (variable_identifier -> ID .)
+
+  ! MUL             [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! ADD             [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! OPERATOR        [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! THEN            [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! DO              [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! END_DOT         [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! END             [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! SEMICOLON       [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! ELSE            [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! RPAREN          [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! COMMA           [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+  ! COLON           [ reduce using rule 69 (field_designator_identifier -> ID .) ]
+
+
+state 97
+
+    (95) while_statement -> WHILE boolean_expression . DO statement
+
+    DO              shift and go to state 132
+
+
+state 98
+
+    (21) constant_definition -> ID OPERATOR constant .
+
+    SEMICOLON       reduce using rule 21 (constant_definition -> ID OPERATOR constant .)
+
+
+state 99
+
+    (22) constant -> number .
+
+    SEMICOLON       reduce using rule 22 (constant -> number .)
+
+
+state 100
+
+    (23) constant -> sign . number
+    (24) constant -> sign . real_number
+    (28) number -> sign . decimal_integer
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (32) real_number -> . digit_sequence ADD fractional_part
+    (33) real_number -> . digit_sequence exponent scale_factor
+    (34) real_number -> . digit_sequence ADD fractional_part exponent scale_factor
+    (29) decimal_integer -> . digit_sequence
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+
+    sign                           shift and go to state 121
+    number                         shift and go to state 133
+    real_number                    shift and go to state 134
+    decimal_integer                shift and go to state 123
+    digit_sequence                 shift and go to state 135
+
+state 101
+
+    (42) type_identifier -> ID .
+
+    SEMICOLON       reduce using rule 42 (type_identifier -> ID .)
+
+
+state 102
+
+    (45) type_definition -> ID ASSIGN type_denoter .
+
+    SEMICOLON       reduce using rule 45 (type_definition -> ID ASSIGN type_denoter .)
+
+
+state 103
+
+    (41) type_denoter -> type_identifier .
+
+    SEMICOLON       reduce using rule 41 (type_denoter -> type_identifier .)
+
+
+state 104
+
+    (40) variable_declaration -> identifier_list COLON type_denoter .
+
+    SEMICOLON       reduce using rule 40 (variable_declaration -> identifier_list COLON type_denoter .)
+
+
+state 105
+
+    (6) identifier_list -> identifier_list COMMA identifier .
+    (9) identifier -> identifier . STRING
+    (10) identifier -> identifier . NUMBER
+
+    COLON           reduce using rule 6 (identifier_list -> identifier_list COMMA identifier .)
+    COMMA           reduce using rule 6 (identifier_list -> identifier_list COMMA identifier .)
+    RPAREN          reduce using rule 6 (identifier_list -> identifier_list COMMA identifier .)
+    STRING          shift and go to state 20
+    NUMBER          shift and go to state 21
+
+
+state 106
+
+    (48) compound_statement -> BEGIN statement_sequence END SEMICOLON .
+
+    $end            reduce using rule 48 (compound_statement -> BEGIN statement_sequence END SEMICOLON .)
+    END_DOT         reduce using rule 48 (compound_statement -> BEGIN statement_sequence END SEMICOLON .)
+    END             reduce using rule 48 (compound_statement -> BEGIN statement_sequence END SEMICOLON .)
+    SEMICOLON       reduce using rule 48 (compound_statement -> BEGIN statement_sequence END SEMICOLON .)
+    ELSE            reduce using rule 48 (compound_statement -> BEGIN statement_sequence END SEMICOLON .)
+
+
+state 107
+
+    (50) statement_sequence -> statement_sequence SEMICOLON statement .
+
+    END_DOT         reduce using rule 50 (statement_sequence -> statement_sequence SEMICOLON statement .)
+    END             reduce using rule 50 (statement_sequence -> statement_sequence SEMICOLON statement .)
+    SEMICOLON       reduce using rule 50 (statement_sequence -> statement_sequence SEMICOLON statement .)
+
+
+state 108
+
+    (60) assignment_statement -> assignment_statement_lhs ASSIGN expression .
+
+    END_DOT         reduce using rule 60 (assignment_statement -> assignment_statement_lhs ASSIGN expression .)
+    END             reduce using rule 60 (assignment_statement -> assignment_statement_lhs ASSIGN expression .)
+    SEMICOLON       reduce using rule 60 (assignment_statement -> assignment_statement_lhs ASSIGN expression .)
+    ELSE            reduce using rule 60 (assignment_statement -> assignment_statement_lhs ASSIGN expression .)
+
+
+state 109
+
+    (103) read_parameter_list -> LPAREN variable_access . RPAREN
+    (62) file_variable -> variable_access .
+    (81) factor -> variable_access .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 136
+    COMMA           reduce using rule 62 (file_variable -> variable_access .)
+    MUL             reduce using rule 81 (factor -> variable_access .)
+    ADD             reduce using rule 81 (factor -> variable_access .)
+    OPERATOR        reduce using rule 81 (factor -> variable_access .)
+    COLON           reduce using rule 81 (factor -> variable_access .)
+
+  ! RPAREN          [ reduce using rule 81 (factor -> variable_access .) ]
+
+
+state 110
+
+    (104) read_parameter_list -> LPAREN file_variable . COMMA variable_access RPAREN
+    (105) read_parameter_list -> LPAREN file_variable . COMMA variable_access COMMA variable_access RPAREN
+    (101) write_parameter_list -> LPAREN file_variable . COMMA write_parameter RPAREN
+    (102) write_parameter_list -> LPAREN file_variable . COMMA write_parameter COMMA write_parameter RPAREN
+
+    COMMA           shift and go to state 137
+
+
+state 111
+
+    (99) write_parameter_list -> LPAREN write_parameter . RPAREN
+
+    RPAREN          shift and go to state 138
+
+
+state 112
+
+    (100) write_parameter_list -> LPAREN STRING . COMMA write_parameter RPAREN
+
+    COMMA           shift and go to state 139
+
+
+state 113
+
+    (96) write_parameter -> expression .
+    (97) write_parameter -> expression . COLON expression
+    (98) write_parameter -> expression . COLON expression COLON expression
+
+    RPAREN          reduce using rule 96 (write_parameter -> expression .)
+    COMMA           reduce using rule 96 (write_parameter -> expression .)
+    COLON           shift and go to state 140
+
+
+state 114
+
+    (90) if_statement -> IF boolean_expression THEN . statement else_part
+    (51) statement -> . simple_statement
+    (52) statement -> . structured_statement
+    (53) simple_statement -> . empty_statement
+    (54) simple_statement -> . assignment_statement
+    (55) simple_statement -> . procedure_statement
+    (56) structured_statement -> . compound_statement
+    (57) structured_statement -> . conditional_statement
+    (58) structured_statement -> . repetitive_statement
+    (59) empty_statement -> . SEMICOLON
+    (60) assignment_statement -> . assignment_statement_lhs ASSIGN expression
+    (106) procedure_statement -> . procedure_identifier read_parameter_list
+    (107) procedure_statement -> . procedure_identifier write_parameter_list
+    (47) compound_statement -> . BEGIN statement_sequence END_DOT
+    (48) compound_statement -> . BEGIN statement_sequence END SEMICOLON
+    (89) conditional_statement -> . if_statement
+    (94) repetitive_statement -> . while_statement
+    (61) assignment_statement_lhs -> . variable_access
+    (108) procedure_identifier -> . ID
+    (90) if_statement -> . IF boolean_expression THEN statement else_part
+    (95) while_statement -> . WHILE boolean_expression DO statement
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    SEMICOLON       shift and go to state 39
+    BEGIN           shift and go to state 25
+    ID              shift and go to state 54
+    IF              shift and go to state 55
+    WHILE           shift and go to state 56
+
+    statement                      shift and go to state 141
+    simple_statement               shift and go to state 41
+    structured_statement           shift and go to state 42
+    empty_statement                shift and go to state 43
+    assignment_statement           shift and go to state 44
+    procedure_statement            shift and go to state 45
+    compound_statement             shift and go to state 46
+    conditional_statement          shift and go to state 47
+    repetitive_statement           shift and go to state 48
+    assignment_statement_lhs       shift and go to state 49
+    procedure_identifier           shift and go to state 50
+    if_statement                   shift and go to state 51
+    while_statement                shift and go to state 52
+    variable_access                shift and go to state 53
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 115
+
+    (71) expression -> shift_expression relational_operator . shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    shift_expression               shift and go to state 142
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 116
+
+    (72) relational_operator -> OPERATOR .
+
+    LPAREN          reduce using rule 72 (relational_operator -> OPERATOR .)
+    NOT             reduce using rule 72 (relational_operator -> OPERATOR .)
+    ADD             reduce using rule 72 (relational_operator -> OPERATOR .)
+    MUL             reduce using rule 72 (relational_operator -> OPERATOR .)
+    NUMBER          reduce using rule 72 (relational_operator -> OPERATOR .)
+    ID              reduce using rule 72 (relational_operator -> OPERATOR .)
+
+
+state 117
+
+    (75) simple_expression -> term ADD . term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    term                           shift and go to state 143
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 118
+
+    (76) simple_expression -> term MUL . term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    term                           shift and go to state 144
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 119
+
+    (78) term -> factor multiplying_operator . factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    factor                         shift and go to state 145
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 120
+
+    (84) multiplying_operator -> MUL .
+
+    LPAREN          reduce using rule 84 (multiplying_operator -> MUL .)
+    NOT             reduce using rule 84 (multiplying_operator -> MUL .)
+    ADD             reduce using rule 84 (multiplying_operator -> MUL .)
+    MUL             reduce using rule 84 (multiplying_operator -> MUL .)
+    NUMBER          reduce using rule 84 (multiplying_operator -> MUL .)
+    ID              reduce using rule 84 (multiplying_operator -> MUL .)
+
+
+state 121
+
+    (28) number -> sign . decimal_integer
+    (29) decimal_integer -> . digit_sequence
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    NUMBER          shift and go to state 95
+
+    decimal_integer                shift and go to state 146
+    digit_sequence                 shift and go to state 94
+
+state 122
+
+    (79) factor -> sign unsigned_constant .
+
+    MUL             reduce using rule 79 (factor -> sign unsigned_constant .)
+    ADD             reduce using rule 79 (factor -> sign unsigned_constant .)
+    OPERATOR        reduce using rule 79 (factor -> sign unsigned_constant .)
+    THEN            reduce using rule 79 (factor -> sign unsigned_constant .)
+    DO              reduce using rule 79 (factor -> sign unsigned_constant .)
+    END_DOT         reduce using rule 79 (factor -> sign unsigned_constant .)
+    END             reduce using rule 79 (factor -> sign unsigned_constant .)
+    SEMICOLON       reduce using rule 79 (factor -> sign unsigned_constant .)
+    ELSE            reduce using rule 79 (factor -> sign unsigned_constant .)
+    COLON           reduce using rule 79 (factor -> sign unsigned_constant .)
+    RPAREN          reduce using rule 79 (factor -> sign unsigned_constant .)
+    COMMA           reduce using rule 79 (factor -> sign unsigned_constant .)
+
+
+state 123
+
+    (28) number -> sign decimal_integer .
+    (27) number -> decimal_integer .
+
+  ! reduce/reduce conflict for MUL resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for ADD resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for OPERATOR resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for THEN resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for DO resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for END_DOT resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for END resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for ELSE resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for COLON resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 27 (number -> decimal_integer .)
+  ! reduce/reduce conflict for COMMA resolved using rule 27 (number -> decimal_integer .)
+    MUL             reduce using rule 27 (number -> decimal_integer .)
+    ADD             reduce using rule 27 (number -> decimal_integer .)
+    OPERATOR        reduce using rule 27 (number -> decimal_integer .)
+    THEN            reduce using rule 27 (number -> decimal_integer .)
+    DO              reduce using rule 27 (number -> decimal_integer .)
+    END_DOT         reduce using rule 27 (number -> decimal_integer .)
+    END             reduce using rule 27 (number -> decimal_integer .)
+    SEMICOLON       reduce using rule 27 (number -> decimal_integer .)
+    ELSE            reduce using rule 27 (number -> decimal_integer .)
+    COLON           reduce using rule 27 (number -> decimal_integer .)
+    RPAREN          reduce using rule 27 (number -> decimal_integer .)
+    COMMA           reduce using rule 27 (number -> decimal_integer .)
+
+  ! MUL             [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! ADD             [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! OPERATOR        [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! THEN            [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! DO              [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! SEMICOLON       [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! END_DOT         [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! END             [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! ELSE            [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! COLON           [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! RPAREN          [ reduce using rule 28 (number -> sign decimal_integer .) ]
+  ! COMMA           [ reduce using rule 28 (number -> sign decimal_integer .) ]
+
+
+state 124
+
+    (85) unsigned_constant -> number .
+
+    MUL             reduce using rule 85 (unsigned_constant -> number .)
+    ADD             reduce using rule 85 (unsigned_constant -> number .)
+    OPERATOR        reduce using rule 85 (unsigned_constant -> number .)
+    THEN            reduce using rule 85 (unsigned_constant -> number .)
+    DO              reduce using rule 85 (unsigned_constant -> number .)
+    END_DOT         reduce using rule 85 (unsigned_constant -> number .)
+    END             reduce using rule 85 (unsigned_constant -> number .)
+    SEMICOLON       reduce using rule 85 (unsigned_constant -> number .)
+    ELSE            reduce using rule 85 (unsigned_constant -> number .)
+    COLON           reduce using rule 85 (unsigned_constant -> number .)
+    RPAREN          reduce using rule 85 (unsigned_constant -> number .)
+    COMMA           reduce using rule 85 (unsigned_constant -> number .)
+
+
+state 125
+
+    (86) unsigned_constant -> real_number .
+
+    MUL             reduce using rule 86 (unsigned_constant -> real_number .)
+    ADD             reduce using rule 86 (unsigned_constant -> real_number .)
+    OPERATOR        reduce using rule 86 (unsigned_constant -> real_number .)
+    THEN            reduce using rule 86 (unsigned_constant -> real_number .)
+    DO              reduce using rule 86 (unsigned_constant -> real_number .)
+    END_DOT         reduce using rule 86 (unsigned_constant -> real_number .)
+    END             reduce using rule 86 (unsigned_constant -> real_number .)
+    SEMICOLON       reduce using rule 86 (unsigned_constant -> real_number .)
+    ELSE            reduce using rule 86 (unsigned_constant -> real_number .)
+    COLON           reduce using rule 86 (unsigned_constant -> real_number .)
+    RPAREN          reduce using rule 86 (unsigned_constant -> real_number .)
+    COMMA           reduce using rule 86 (unsigned_constant -> real_number .)
+
+
+state 126
+
+    (87) unsigned_constant -> constant_identifier .
+
+    MUL             reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    ADD             reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    OPERATOR        reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    THEN            reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    DO              reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    END_DOT         reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    END             reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    SEMICOLON       reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    ELSE            reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    COLON           reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    RPAREN          reduce using rule 87 (unsigned_constant -> constant_identifier .)
+    COMMA           reduce using rule 87 (unsigned_constant -> constant_identifier .)
+
+
+state 127
+
+    (29) decimal_integer -> digit_sequence .
+    (32) real_number -> digit_sequence . ADD fractional_part
+    (33) real_number -> digit_sequence . exponent scale_factor
+    (34) real_number -> digit_sequence . ADD fractional_part exponent scale_factor
+    (31) digit_sequence -> digit_sequence . NUMBER
+    (37) exponent -> . EXPONENT
+
+  ! shift/reduce conflict for ADD resolved as shift
+    MUL             reduce using rule 29 (decimal_integer -> digit_sequence .)
+    OPERATOR        reduce using rule 29 (decimal_integer -> digit_sequence .)
+    THEN            reduce using rule 29 (decimal_integer -> digit_sequence .)
+    DO              reduce using rule 29 (decimal_integer -> digit_sequence .)
+    END_DOT         reduce using rule 29 (decimal_integer -> digit_sequence .)
+    END             reduce using rule 29 (decimal_integer -> digit_sequence .)
+    SEMICOLON       reduce using rule 29 (decimal_integer -> digit_sequence .)
+    ELSE            reduce using rule 29 (decimal_integer -> digit_sequence .)
+    COLON           reduce using rule 29 (decimal_integer -> digit_sequence .)
+    RPAREN          reduce using rule 29 (decimal_integer -> digit_sequence .)
+    COMMA           reduce using rule 29 (decimal_integer -> digit_sequence .)
+    ADD             shift and go to state 147
+    NUMBER          shift and go to state 131
+    EXPONENT        shift and go to state 149
+
+  ! ADD             [ reduce using rule 29 (decimal_integer -> digit_sequence .) ]
+
+    exponent                       shift and go to state 148
+
+state 128
+
+    (88) constant_identifier -> ID .
+
+    MUL             reduce using rule 88 (constant_identifier -> ID .)
+    ADD             reduce using rule 88 (constant_identifier -> ID .)
+    OPERATOR        reduce using rule 88 (constant_identifier -> ID .)
+    THEN            reduce using rule 88 (constant_identifier -> ID .)
+    DO              reduce using rule 88 (constant_identifier -> ID .)
+    END_DOT         reduce using rule 88 (constant_identifier -> ID .)
+    END             reduce using rule 88 (constant_identifier -> ID .)
+    SEMICOLON       reduce using rule 88 (constant_identifier -> ID .)
+    ELSE            reduce using rule 88 (constant_identifier -> ID .)
+    COLON           reduce using rule 88 (constant_identifier -> ID .)
+    RPAREN          reduce using rule 88 (constant_identifier -> ID .)
+    COMMA           reduce using rule 88 (constant_identifier -> ID .)
+
+
+state 129
+
+    (82) factor -> LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 150
+
+
+state 130
+
+    (83) factor -> NOT factor .
+
+    MUL             reduce using rule 83 (factor -> NOT factor .)
+    ADD             reduce using rule 83 (factor -> NOT factor .)
+    OPERATOR        reduce using rule 83 (factor -> NOT factor .)
+    THEN            reduce using rule 83 (factor -> NOT factor .)
+    DO              reduce using rule 83 (factor -> NOT factor .)
+    END_DOT         reduce using rule 83 (factor -> NOT factor .)
+    END             reduce using rule 83 (factor -> NOT factor .)
+    SEMICOLON       reduce using rule 83 (factor -> NOT factor .)
+    ELSE            reduce using rule 83 (factor -> NOT factor .)
+    COLON           reduce using rule 83 (factor -> NOT factor .)
+    RPAREN          reduce using rule 83 (factor -> NOT factor .)
+    COMMA           reduce using rule 83 (factor -> NOT factor .)
+
+
+state 131
+
+    (31) digit_sequence -> digit_sequence NUMBER .
+
+    NUMBER          reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    MUL             reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    ADD             reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    OPERATOR        reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    THEN            reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    DO              reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    SEMICOLON       reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    END_DOT         reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    END             reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    ELSE            reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    COLON           reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    RPAREN          reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    EXPONENT        reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+    COMMA           reduce using rule 31 (digit_sequence -> digit_sequence NUMBER .)
+
+
+state 132
+
+    (95) while_statement -> WHILE boolean_expression DO . statement
+    (51) statement -> . simple_statement
+    (52) statement -> . structured_statement
+    (53) simple_statement -> . empty_statement
+    (54) simple_statement -> . assignment_statement
+    (55) simple_statement -> . procedure_statement
+    (56) structured_statement -> . compound_statement
+    (57) structured_statement -> . conditional_statement
+    (58) structured_statement -> . repetitive_statement
+    (59) empty_statement -> . SEMICOLON
+    (60) assignment_statement -> . assignment_statement_lhs ASSIGN expression
+    (106) procedure_statement -> . procedure_identifier read_parameter_list
+    (107) procedure_statement -> . procedure_identifier write_parameter_list
+    (47) compound_statement -> . BEGIN statement_sequence END_DOT
+    (48) compound_statement -> . BEGIN statement_sequence END SEMICOLON
+    (89) conditional_statement -> . if_statement
+    (94) repetitive_statement -> . while_statement
+    (61) assignment_statement_lhs -> . variable_access
+    (108) procedure_identifier -> . ID
+    (90) if_statement -> . IF boolean_expression THEN statement else_part
+    (95) while_statement -> . WHILE boolean_expression DO statement
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    SEMICOLON       shift and go to state 39
+    BEGIN           shift and go to state 25
+    ID              shift and go to state 54
+    IF              shift and go to state 55
+    WHILE           shift and go to state 56
+
+    statement                      shift and go to state 151
+    simple_statement               shift and go to state 41
+    structured_statement           shift and go to state 42
+    empty_statement                shift and go to state 43
+    assignment_statement           shift and go to state 44
+    procedure_statement            shift and go to state 45
+    compound_statement             shift and go to state 46
+    conditional_statement          shift and go to state 47
+    repetitive_statement           shift and go to state 48
+    assignment_statement_lhs       shift and go to state 49
+    procedure_identifier           shift and go to state 50
+    if_statement                   shift and go to state 51
+    while_statement                shift and go to state 52
+    variable_access                shift and go to state 53
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 133
+
+    (23) constant -> sign number .
+
+    SEMICOLON       reduce using rule 23 (constant -> sign number .)
+
+
+state 134
+
+    (24) constant -> sign real_number .
+
+    SEMICOLON       reduce using rule 24 (constant -> sign real_number .)
+
+
+state 135
+
+    (32) real_number -> digit_sequence . ADD fractional_part
+    (33) real_number -> digit_sequence . exponent scale_factor
+    (34) real_number -> digit_sequence . ADD fractional_part exponent scale_factor
+    (29) decimal_integer -> digit_sequence .
+    (31) digit_sequence -> digit_sequence . NUMBER
+    (37) exponent -> . EXPONENT
+
+    ADD             shift and go to state 147
+    SEMICOLON       reduce using rule 29 (decimal_integer -> digit_sequence .)
+    NUMBER          shift and go to state 131
+    EXPONENT        shift and go to state 149
+
+    exponent                       shift and go to state 148
+
+state 136
+
+    (103) read_parameter_list -> LPAREN variable_access RPAREN .
+
+    END_DOT         reduce using rule 103 (read_parameter_list -> LPAREN variable_access RPAREN .)
+    END             reduce using rule 103 (read_parameter_list -> LPAREN variable_access RPAREN .)
+    SEMICOLON       reduce using rule 103 (read_parameter_list -> LPAREN variable_access RPAREN .)
+    ELSE            reduce using rule 103 (read_parameter_list -> LPAREN variable_access RPAREN .)
+
+
+state 137
+
+    (104) read_parameter_list -> LPAREN file_variable COMMA . variable_access RPAREN
+    (105) read_parameter_list -> LPAREN file_variable COMMA . variable_access COMMA variable_access RPAREN
+    (101) write_parameter_list -> LPAREN file_variable COMMA . write_parameter RPAREN
+    (102) write_parameter_list -> LPAREN file_variable COMMA . write_parameter COMMA write_parameter RPAREN
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (96) write_parameter -> . expression
+    (97) write_parameter -> . expression COLON expression
+    (98) write_parameter -> . expression COLON expression COLON expression
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (73) shift_expression -> . simple_expression
+    (69) field_designator_identifier -> . ID
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (29) decimal_integer -> . digit_sequence
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    ID              shift and go to state 96
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+
+    variable_access                shift and go to state 152
+    write_parameter                shift and go to state 153
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    expression                     shift and go to state 113
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    shift_expression               shift and go to state 82
+    field_designator_identifier    shift and go to state 61
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    decimal_integer                shift and go to state 93
+    digit_sequence                 shift and go to state 94
+
+state 138
+
+    (99) write_parameter_list -> LPAREN write_parameter RPAREN .
+
+    END_DOT         reduce using rule 99 (write_parameter_list -> LPAREN write_parameter RPAREN .)
+    END             reduce using rule 99 (write_parameter_list -> LPAREN write_parameter RPAREN .)
+    SEMICOLON       reduce using rule 99 (write_parameter_list -> LPAREN write_parameter RPAREN .)
+    ELSE            reduce using rule 99 (write_parameter_list -> LPAREN write_parameter RPAREN .)
+
+
+state 139
+
+    (100) write_parameter_list -> LPAREN STRING COMMA . write_parameter RPAREN
+    (96) write_parameter -> . expression
+    (97) write_parameter -> . expression COLON expression
+    (98) write_parameter -> . expression COLON expression COLON expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    write_parameter                shift and go to state 154
+    expression                     shift and go to state 113
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 140
+
+    (97) write_parameter -> expression COLON . expression
+    (98) write_parameter -> expression COLON . expression COLON expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    expression                     shift and go to state 155
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 141
+
+    (90) if_statement -> IF boolean_expression THEN statement . else_part
+    (92) else_part -> . ELSE statement
+    (93) else_part -> . empty_statement
+    (59) empty_statement -> . SEMICOLON
+
+    ELSE            shift and go to state 157
+    SEMICOLON       shift and go to state 39
+
+    else_part                      shift and go to state 156
+    empty_statement                shift and go to state 158
+
+state 142
+
+    (71) expression -> shift_expression relational_operator shift_expression .
+
+    THEN            reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    DO              reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    END_DOT         reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    END             reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    SEMICOLON       reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    ELSE            reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    COLON           reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    RPAREN          reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+    COMMA           reduce using rule 71 (expression -> shift_expression relational_operator shift_expression .)
+
+
+state 143
+
+    (75) simple_expression -> term ADD term .
+
+    OPERATOR        reduce using rule 75 (simple_expression -> term ADD term .)
+    THEN            reduce using rule 75 (simple_expression -> term ADD term .)
+    DO              reduce using rule 75 (simple_expression -> term ADD term .)
+    END_DOT         reduce using rule 75 (simple_expression -> term ADD term .)
+    END             reduce using rule 75 (simple_expression -> term ADD term .)
+    SEMICOLON       reduce using rule 75 (simple_expression -> term ADD term .)
+    ELSE            reduce using rule 75 (simple_expression -> term ADD term .)
+    COLON           reduce using rule 75 (simple_expression -> term ADD term .)
+    RPAREN          reduce using rule 75 (simple_expression -> term ADD term .)
+    COMMA           reduce using rule 75 (simple_expression -> term ADD term .)
+
+
+state 144
+
+    (76) simple_expression -> term MUL term .
+
+    OPERATOR        reduce using rule 76 (simple_expression -> term MUL term .)
+    THEN            reduce using rule 76 (simple_expression -> term MUL term .)
+    DO              reduce using rule 76 (simple_expression -> term MUL term .)
+    END_DOT         reduce using rule 76 (simple_expression -> term MUL term .)
+    END             reduce using rule 76 (simple_expression -> term MUL term .)
+    SEMICOLON       reduce using rule 76 (simple_expression -> term MUL term .)
+    ELSE            reduce using rule 76 (simple_expression -> term MUL term .)
+    COLON           reduce using rule 76 (simple_expression -> term MUL term .)
+    RPAREN          reduce using rule 76 (simple_expression -> term MUL term .)
+    COMMA           reduce using rule 76 (simple_expression -> term MUL term .)
+
+
+state 145
+
+    (78) term -> factor multiplying_operator factor .
+
+    ADD             reduce using rule 78 (term -> factor multiplying_operator factor .)
+    MUL             reduce using rule 78 (term -> factor multiplying_operator factor .)
+    OPERATOR        reduce using rule 78 (term -> factor multiplying_operator factor .)
+    THEN            reduce using rule 78 (term -> factor multiplying_operator factor .)
+    DO              reduce using rule 78 (term -> factor multiplying_operator factor .)
+    END_DOT         reduce using rule 78 (term -> factor multiplying_operator factor .)
+    END             reduce using rule 78 (term -> factor multiplying_operator factor .)
+    SEMICOLON       reduce using rule 78 (term -> factor multiplying_operator factor .)
+    ELSE            reduce using rule 78 (term -> factor multiplying_operator factor .)
+    COLON           reduce using rule 78 (term -> factor multiplying_operator factor .)
+    RPAREN          reduce using rule 78 (term -> factor multiplying_operator factor .)
+    COMMA           reduce using rule 78 (term -> factor multiplying_operator factor .)
+
+
+state 146
+
+    (28) number -> sign decimal_integer .
+
+    MUL             reduce using rule 28 (number -> sign decimal_integer .)
+    ADD             reduce using rule 28 (number -> sign decimal_integer .)
+    OPERATOR        reduce using rule 28 (number -> sign decimal_integer .)
+    THEN            reduce using rule 28 (number -> sign decimal_integer .)
+    DO              reduce using rule 28 (number -> sign decimal_integer .)
+    END_DOT         reduce using rule 28 (number -> sign decimal_integer .)
+    END             reduce using rule 28 (number -> sign decimal_integer .)
+    SEMICOLON       reduce using rule 28 (number -> sign decimal_integer .)
+    ELSE            reduce using rule 28 (number -> sign decimal_integer .)
+    COLON           reduce using rule 28 (number -> sign decimal_integer .)
+    RPAREN          reduce using rule 28 (number -> sign decimal_integer .)
+    COMMA           reduce using rule 28 (number -> sign decimal_integer .)
+
+
+state 147
+
+    (32) real_number -> digit_sequence ADD . fractional_part
+    (34) real_number -> digit_sequence ADD . fractional_part exponent scale_factor
+    (35) fractional_part -> . digit_sequence
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    NUMBER          shift and go to state 95
+
+    digit_sequence                 shift and go to state 159
+    fractional_part                shift and go to state 160
+
+state 148
+
+    (33) real_number -> digit_sequence exponent . scale_factor
+    (36) scale_factor -> . sign digit_sequence
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+
+    scale_factor                   shift and go to state 161
+    sign                           shift and go to state 162
+
+state 149
+
+    (37) exponent -> EXPONENT .
+
+    ADD             reduce using rule 37 (exponent -> EXPONENT .)
+    MUL             reduce using rule 37 (exponent -> EXPONENT .)
+
+
+state 150
+
+    (82) factor -> LPAREN expression RPAREN .
+
+    MUL             reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    ADD             reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    OPERATOR        reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    DO              reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    END_DOT         reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    END             reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    ELSE            reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    COLON           reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 82 (factor -> LPAREN expression RPAREN .)
+
+
+state 151
+
+    (95) while_statement -> WHILE boolean_expression DO statement .
+
+    END_DOT         reduce using rule 95 (while_statement -> WHILE boolean_expression DO statement .)
+    END             reduce using rule 95 (while_statement -> WHILE boolean_expression DO statement .)
+    SEMICOLON       reduce using rule 95 (while_statement -> WHILE boolean_expression DO statement .)
+    ELSE            reduce using rule 95 (while_statement -> WHILE boolean_expression DO statement .)
+
+
+state 152
+
+    (104) read_parameter_list -> LPAREN file_variable COMMA variable_access . RPAREN
+    (105) read_parameter_list -> LPAREN file_variable COMMA variable_access . COMMA variable_access RPAREN
+    (81) factor -> variable_access .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+  ! shift/reduce conflict for COMMA resolved as shift
+    RPAREN          shift and go to state 164
+    COMMA           shift and go to state 163
+    MUL             reduce using rule 81 (factor -> variable_access .)
+    ADD             reduce using rule 81 (factor -> variable_access .)
+    OPERATOR        reduce using rule 81 (factor -> variable_access .)
+    COLON           reduce using rule 81 (factor -> variable_access .)
+
+  ! RPAREN          [ reduce using rule 81 (factor -> variable_access .) ]
+  ! COMMA           [ reduce using rule 81 (factor -> variable_access .) ]
+
+
+state 153
+
+    (101) write_parameter_list -> LPAREN file_variable COMMA write_parameter . RPAREN
+    (102) write_parameter_list -> LPAREN file_variable COMMA write_parameter . COMMA write_parameter RPAREN
+
+    RPAREN          shift and go to state 166
+    COMMA           shift and go to state 165
+
+
+state 154
+
+    (100) write_parameter_list -> LPAREN STRING COMMA write_parameter . RPAREN
+
+    RPAREN          shift and go to state 167
+
+
+state 155
+
+    (97) write_parameter -> expression COLON expression .
+    (98) write_parameter -> expression COLON expression . COLON expression
+
+    RPAREN          reduce using rule 97 (write_parameter -> expression COLON expression .)
+    COMMA           reduce using rule 97 (write_parameter -> expression COLON expression .)
+    COLON           shift and go to state 168
+
+
+state 156
+
+    (90) if_statement -> IF boolean_expression THEN statement else_part .
+
+    END_DOT         reduce using rule 90 (if_statement -> IF boolean_expression THEN statement else_part .)
+    END             reduce using rule 90 (if_statement -> IF boolean_expression THEN statement else_part .)
+    SEMICOLON       reduce using rule 90 (if_statement -> IF boolean_expression THEN statement else_part .)
+    ELSE            reduce using rule 90 (if_statement -> IF boolean_expression THEN statement else_part .)
+
+
+state 157
+
+    (92) else_part -> ELSE . statement
+    (51) statement -> . simple_statement
+    (52) statement -> . structured_statement
+    (53) simple_statement -> . empty_statement
+    (54) simple_statement -> . assignment_statement
+    (55) simple_statement -> . procedure_statement
+    (56) structured_statement -> . compound_statement
+    (57) structured_statement -> . conditional_statement
+    (58) structured_statement -> . repetitive_statement
+    (59) empty_statement -> . SEMICOLON
+    (60) assignment_statement -> . assignment_statement_lhs ASSIGN expression
+    (106) procedure_statement -> . procedure_identifier read_parameter_list
+    (107) procedure_statement -> . procedure_identifier write_parameter_list
+    (47) compound_statement -> . BEGIN statement_sequence END_DOT
+    (48) compound_statement -> . BEGIN statement_sequence END SEMICOLON
+    (89) conditional_statement -> . if_statement
+    (94) repetitive_statement -> . while_statement
+    (61) assignment_statement_lhs -> . variable_access
+    (108) procedure_identifier -> . ID
+    (90) if_statement -> . IF boolean_expression THEN statement else_part
+    (95) while_statement -> . WHILE boolean_expression DO statement
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    SEMICOLON       shift and go to state 39
+    BEGIN           shift and go to state 25
+    ID              shift and go to state 54
+    IF              shift and go to state 55
+    WHILE           shift and go to state 56
+
+    statement                      shift and go to state 169
+    simple_statement               shift and go to state 41
+    structured_statement           shift and go to state 42
+    empty_statement                shift and go to state 43
+    assignment_statement           shift and go to state 44
+    procedure_statement            shift and go to state 45
+    compound_statement             shift and go to state 46
+    conditional_statement          shift and go to state 47
+    repetitive_statement           shift and go to state 48
+    assignment_statement_lhs       shift and go to state 49
+    procedure_identifier           shift and go to state 50
+    if_statement                   shift and go to state 51
+    while_statement                shift and go to state 52
+    variable_access                shift and go to state 53
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 158
+
+    (93) else_part -> empty_statement .
+
+    END_DOT         reduce using rule 93 (else_part -> empty_statement .)
+    END             reduce using rule 93 (else_part -> empty_statement .)
+    SEMICOLON       reduce using rule 93 (else_part -> empty_statement .)
+    ELSE            reduce using rule 93 (else_part -> empty_statement .)
+
+
+state 159
+
+    (35) fractional_part -> digit_sequence .
+    (31) digit_sequence -> digit_sequence . NUMBER
+
+    EXPONENT        reduce using rule 35 (fractional_part -> digit_sequence .)
+    MUL             reduce using rule 35 (fractional_part -> digit_sequence .)
+    ADD             reduce using rule 35 (fractional_part -> digit_sequence .)
+    OPERATOR        reduce using rule 35 (fractional_part -> digit_sequence .)
+    THEN            reduce using rule 35 (fractional_part -> digit_sequence .)
+    DO              reduce using rule 35 (fractional_part -> digit_sequence .)
+    END_DOT         reduce using rule 35 (fractional_part -> digit_sequence .)
+    END             reduce using rule 35 (fractional_part -> digit_sequence .)
+    SEMICOLON       reduce using rule 35 (fractional_part -> digit_sequence .)
+    ELSE            reduce using rule 35 (fractional_part -> digit_sequence .)
+    COLON           reduce using rule 35 (fractional_part -> digit_sequence .)
+    RPAREN          reduce using rule 35 (fractional_part -> digit_sequence .)
+    COMMA           reduce using rule 35 (fractional_part -> digit_sequence .)
+    NUMBER          shift and go to state 131
+
+
+state 160
+
+    (32) real_number -> digit_sequence ADD fractional_part .
+    (34) real_number -> digit_sequence ADD fractional_part . exponent scale_factor
+    (37) exponent -> . EXPONENT
+
+    MUL             reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    ADD             reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    OPERATOR        reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    THEN            reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    DO              reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    END_DOT         reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    END             reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    SEMICOLON       reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    ELSE            reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    COLON           reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    RPAREN          reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    COMMA           reduce using rule 32 (real_number -> digit_sequence ADD fractional_part .)
+    EXPONENT        shift and go to state 149
+
+    exponent                       shift and go to state 170
+
+state 161
+
+    (33) real_number -> digit_sequence exponent scale_factor .
+
+    MUL             reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    ADD             reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    OPERATOR        reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    THEN            reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    DO              reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    END_DOT         reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    END             reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    SEMICOLON       reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    ELSE            reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    COLON           reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    RPAREN          reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+    COMMA           reduce using rule 33 (real_number -> digit_sequence exponent scale_factor .)
+
+
+state 162
+
+    (36) scale_factor -> sign . digit_sequence
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+
+    NUMBER          shift and go to state 95
+
+    digit_sequence                 shift and go to state 171
+
+state 163
+
+    (105) read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA . variable_access RPAREN
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    ID              shift and go to state 96
+
+    variable_access                shift and go to state 172
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 164
+
+    (104) read_parameter_list -> LPAREN file_variable COMMA variable_access RPAREN .
+
+    END_DOT         reduce using rule 104 (read_parameter_list -> LPAREN file_variable COMMA variable_access RPAREN .)
+    END             reduce using rule 104 (read_parameter_list -> LPAREN file_variable COMMA variable_access RPAREN .)
+    SEMICOLON       reduce using rule 104 (read_parameter_list -> LPAREN file_variable COMMA variable_access RPAREN .)
+    ELSE            reduce using rule 104 (read_parameter_list -> LPAREN file_variable COMMA variable_access RPAREN .)
+
+
+state 165
+
+    (102) write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA . write_parameter RPAREN
+    (96) write_parameter -> . expression
+    (97) write_parameter -> . expression COLON expression
+    (98) write_parameter -> . expression COLON expression COLON expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    write_parameter                shift and go to state 173
+    expression                     shift and go to state 113
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 166
+
+    (101) write_parameter_list -> LPAREN file_variable COMMA write_parameter RPAREN .
+
+    END_DOT         reduce using rule 101 (write_parameter_list -> LPAREN file_variable COMMA write_parameter RPAREN .)
+    END             reduce using rule 101 (write_parameter_list -> LPAREN file_variable COMMA write_parameter RPAREN .)
+    SEMICOLON       reduce using rule 101 (write_parameter_list -> LPAREN file_variable COMMA write_parameter RPAREN .)
+    ELSE            reduce using rule 101 (write_parameter_list -> LPAREN file_variable COMMA write_parameter RPAREN .)
+
+
+state 167
+
+    (100) write_parameter_list -> LPAREN STRING COMMA write_parameter RPAREN .
+
+    END_DOT         reduce using rule 100 (write_parameter_list -> LPAREN STRING COMMA write_parameter RPAREN .)
+    END             reduce using rule 100 (write_parameter_list -> LPAREN STRING COMMA write_parameter RPAREN .)
+    SEMICOLON       reduce using rule 100 (write_parameter_list -> LPAREN STRING COMMA write_parameter RPAREN .)
+    ELSE            reduce using rule 100 (write_parameter_list -> LPAREN STRING COMMA write_parameter RPAREN .)
+
+
+state 168
+
+    (98) write_parameter -> expression COLON expression COLON . expression
+    (70) expression -> . shift_expression
+    (71) expression -> . shift_expression relational_operator shift_expression
+    (73) shift_expression -> . simple_expression
+    (74) simple_expression -> . term
+    (75) simple_expression -> . term ADD term
+    (76) simple_expression -> . term MUL term
+    (77) term -> . factor
+    (78) term -> . factor multiplying_operator factor
+    (79) factor -> . sign unsigned_constant
+    (80) factor -> . number
+    (81) factor -> . variable_access
+    (82) factor -> . LPAREN expression RPAREN
+    (83) factor -> . NOT factor
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+    (27) number -> . decimal_integer
+    (28) number -> . sign decimal_integer
+    (63) variable_access -> . entire_variable
+    (64) variable_access -> . component_variable
+    (29) decimal_integer -> . digit_sequence
+    (65) entire_variable -> . variable_identifier
+    (67) component_variable -> . field_designator
+    (30) digit_sequence -> . NUMBER
+    (31) digit_sequence -> . digit_sequence NUMBER
+    (66) variable_identifier -> . ID
+    (68) field_designator -> . field_designator_identifier
+    (69) field_designator_identifier -> . ID
+
+    LPAREN          shift and go to state 91
+    NOT             shift and go to state 92
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+    NUMBER          shift and go to state 95
+    ID              shift and go to state 96
+
+    expression                     shift and go to state 174
+    shift_expression               shift and go to state 82
+    simple_expression              shift and go to state 83
+    term                           shift and go to state 84
+    factor                         shift and go to state 87
+    sign                           shift and go to state 88
+    number                         shift and go to state 89
+    variable_access                shift and go to state 90
+    decimal_integer                shift and go to state 93
+    entire_variable                shift and go to state 57
+    component_variable             shift and go to state 58
+    digit_sequence                 shift and go to state 94
+    variable_identifier            shift and go to state 59
+    field_designator               shift and go to state 60
+    field_designator_identifier    shift and go to state 61
+
+state 169
+
+    (92) else_part -> ELSE statement .
+
+    END_DOT         reduce using rule 92 (else_part -> ELSE statement .)
+    END             reduce using rule 92 (else_part -> ELSE statement .)
+    SEMICOLON       reduce using rule 92 (else_part -> ELSE statement .)
+    ELSE            reduce using rule 92 (else_part -> ELSE statement .)
+
+
+state 170
+
+    (34) real_number -> digit_sequence ADD fractional_part exponent . scale_factor
+    (36) scale_factor -> . sign digit_sequence
+    (25) sign -> . ADD
+    (26) sign -> . MUL
+
+    ADD             shift and go to state 85
+    MUL             shift and go to state 86
+
+    scale_factor                   shift and go to state 175
+    sign                           shift and go to state 162
+
+state 171
+
+    (36) scale_factor -> sign digit_sequence .
+    (31) digit_sequence -> digit_sequence . NUMBER
+
+    MUL             reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    ADD             reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    OPERATOR        reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    THEN            reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    DO              reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    END_DOT         reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    END             reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    SEMICOLON       reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    ELSE            reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    COLON           reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    RPAREN          reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    COMMA           reduce using rule 36 (scale_factor -> sign digit_sequence .)
+    NUMBER          shift and go to state 131
+
+
+state 172
+
+    (105) read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access . RPAREN
+
+    RPAREN          shift and go to state 176
+
+
+state 173
+
+    (102) write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter . RPAREN
+
+    RPAREN          shift and go to state 177
+
+
+state 174
+
+    (98) write_parameter -> expression COLON expression COLON expression .
+
+    RPAREN          reduce using rule 98 (write_parameter -> expression COLON expression COLON expression .)
+    COMMA           reduce using rule 98 (write_parameter -> expression COLON expression COLON expression .)
+
+
+state 175
+
+    (34) real_number -> digit_sequence ADD fractional_part exponent scale_factor .
+
+    MUL             reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    ADD             reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    OPERATOR        reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    THEN            reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    DO              reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    END_DOT         reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    END             reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    SEMICOLON       reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    ELSE            reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    COLON           reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    RPAREN          reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+    COMMA           reduce using rule 34 (real_number -> digit_sequence ADD fractional_part exponent scale_factor .)
+
+
+state 176
+
+    (105) read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN .
+
+    END_DOT         reduce using rule 105 (read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN .)
+    END             reduce using rule 105 (read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN .)
+    SEMICOLON       reduce using rule 105 (read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN .)
+    ELSE            reduce using rule 105 (read_parameter_list -> LPAREN file_variable COMMA variable_access COMMA variable_access RPAREN .)
+
+
+state 177
+
+    (102) write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN .
+
+    END_DOT         reduce using rule 102 (write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN .)
+    END             reduce using rule 102 (write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN .)
+    SEMICOLON       reduce using rule 102 (write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN .)
+    ELSE            reduce using rule 102 (write_parameter_list -> LPAREN file_variable COMMA write_parameter COMMA write_parameter RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for MUL in state 87 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 109 resolved as shift
+WARNING: shift/reduce conflict for ADD in state 127 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 152 resolved as shift
+WARNING: shift/reduce conflict for COMMA in state 152 resolved as shift
+WARNING: reduce/reduce conflict in state 54 resolved using rule (variable_identifier -> ID)
+WARNING: rejected rule (field_designator_identifier -> ID) in state 54
+WARNING: reduce/reduce conflict in state 96 resolved using rule (variable_identifier -> ID)
+WARNING: rejected rule (field_designator_identifier -> ID) in state 96
+WARNING: reduce/reduce conflict in state 123 resolved using rule (number -> decimal_integer)
+WARNING: rejected rule (number -> sign decimal_integer) in state 123
+WARNING: Rule (field_designator_identifier -> ID) is never reduced
