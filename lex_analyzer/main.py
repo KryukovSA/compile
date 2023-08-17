@@ -6,9 +6,6 @@ import ply.yacc as yacc
 
 from lex_analyzer.generate_code import generate_assembly_code
 
-
-# Класс для представления токенов
-
 # Список ключевых слов
 keywords = {
     'program': 'PROGRAM',
