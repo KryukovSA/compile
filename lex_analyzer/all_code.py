@@ -1,18 +1,13 @@
 import ply.lex as lex
 import ply.yacc as yacc
-import llvmlite.ir as ir
-from llvmlite.ir import DoubleType, Function, GlobalVariable
-from llvmlite.binding import Target
+# import llvmlite.ir as ir
+# from llvmlite.ir import DoubleType, Function, GlobalVariable
+# from llvmlite.binding import Target
 
 from lex_analyzer.generate_code import generate_assembly_code
 
 
 # Класс для представления токенов
-class Token:
-    def __init__(self, type, value):
-        self.type = type
-        self.value = value
-
 
 # Список ключевых слов
 keywords = {
@@ -599,17 +594,7 @@ def print_ast(node, level=0):
     for child in node.children:
         print_ast(child, level + 1)
 #______________________________________________________________________________________________
-binary_operators = {
-    '+': 'add',
-    '-': 'sub',
-    '*': 'imul',
-    '/': 'idiv',
-    '=': 'cmp',
-    '<': 'jl',  # Пример, может измениться в зависимости от архитектуры
-    '>': 'jg',  # Пример, может измениться в зависимости от архитектуры
-    '<=': 'jle',  # Пример, может измениться в зависимости от архитектуры
-    '>=': 'jge',  # Пример, может измениться в зависимости от архитектуры
-}
+
 
 
 # Генератор кода ассемблера
@@ -899,9 +884,9 @@ if __name__ == "__main__":
         var radius: real;
         begin
             radius := 1.5;
-            write( PI * radius * radius)
+            write( PI * radius)
         end.'''
-    #FOR TEST SYNTAX ANALIZER
+    #FOR TEST LEXIC AND SYNTAX ANALIZER
     # code = '''
     #     program Test;
     #     const PI = 3.14;
@@ -941,14 +926,12 @@ if __name__ == "__main__":
     print_ast(result)
 
 
-    # AST, полученное после парсинга программы
-
     # Генерация кода
     assembly_code = generate_assembly_code_final(result)
     print("Generated Assembly Code:")
     print(assembly_code)
 
-  # Генерация кода OLD
-    assembly_code = generate_assembly_code(result)
-    print("Generated Assembly Code OLD:")
-    print(assembly_code)
+  # # Генерация кода OLD
+  #   assembly_code = generate_assembly_code(result)
+  #   print("Generated Assembly Code OLD:")
+  #   print(assembly_code)
