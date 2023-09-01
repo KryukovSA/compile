@@ -1,79 +1,79 @@
 #Некоторые из написанных, но не использованных кодогенераторов
 
 
-class MachineCodeGenerator:
-    def __init__(self):
-        self.code = ""
-
-    def generate_code(self, ast):
-        self.code += "section .text\n"
-        self.visit(ast)
-        return self.code
-
-    def visit(self, node):
-        method_name = 'visit_' + node.type
-        method = getattr(self, method_name, self.generic_visit)
-        return method(node)
-
-    def generic_visit(self, node):
-        if node.children:
-            for child in node.children:
-                self.visit(child)
-
-    def visit_program(self, node):
-        self.generic_visit(node)
-
-    def visit_statement_list(self, node):
-        self.generic_visit(node)
-
-    def visit_statement(self, node):
-        if node.children[0].value == '=':
-            # Assignment statement
-            variable = node.children[0]
-            expr = node.children[1]
-            self.visit(expr)
-            self.code += f"MOV [{variable.value}], AX\n"
-        else:
-            # Print statement
-            expr = node.children[0]
-            self.visit(expr)
-            self.code += "MOV DX, AX\n"
-            self.code += "MOV AH, 2\n"
-            self.code += "INT 21h\n"
-
-    def visit_expr(self, node):
-        if len(node.children) == 3:
-            # Binary operation
-            self.visit(node.children[0])
-            self.code += "PUSH AX\n"
-            self.visit(node.children[2])
-            self.code += "POP BX\n"
-            if node.children[1].type == 'PLUS':
-                self.code += "ADD AX, BX\n"
-            elif node.children[1].type == 'MINUS':
-                self.code += "SUB AX, BX\n"
-
-    def visit_term(self, node):
-        if len(node.children) == 3:
-            # Binary operation
-            self.visit(node.children[0])
-            self.code += "PUSH AX\n"
-            self.visit(node.children[2])
-            self.code += "POP BX\n"
-            if node.children[1].type == 'TIMES':
-                self.code += "MUL BX\n"
-            elif node.children[1].type == 'DIVIDE':
-                self.code += "XCHG AX, BX\n"
-                self.code += "CWD\n"
-                self.code += "IDIV BX\n"
-
-    def visit_factor(self, node):
-        if node.value.isdigit():
-            # Integer literal
-            self.code += f"MOV AX, {node.value}\n"
-        else:
-            # Variable
-            self.code += f"MOV AX, [{node.value}]\n"
+# class MachineCodeGenerator:
+#     def __init__(self):
+#         self.code = ""
+#
+#     def generate_code(self, ast):
+#         self.code += "section .text\n"
+#         self.visit(ast)
+#         return self.code
+#
+#     def visit(self, node):
+#         method_name = 'visit_' + node.type
+#         method = getattr(self, method_name, self.generic_visit)
+#         return method(node)
+#
+#     def generic_visit(self, node):
+#         if node.children:
+#             for child in node.children:
+#                 self.visit(child)
+#
+#     def visit_program(self, node):
+#         self.generic_visit(node)
+#
+#     def visit_statement_list(self, node):
+#         self.generic_visit(node)
+#
+#     def visit_statement(self, node):
+#         if node.children[0].value == '=':
+#             # Assignment statement
+#             variable = node.children[0]
+#             expr = node.children[1]
+#             self.visit(expr)
+#             self.code += f"MOV [{variable.value}], AX\n"
+#         else:
+#             # Print statement
+#             expr = node.children[0]
+#             self.visit(expr)
+#             self.code += "MOV DX, AX\n"
+#             self.code += "MOV AH, 2\n"
+#             self.code += "INT 21h\n"
+#
+#     def visit_expr(self, node):
+#         if len(node.children) == 3:
+#             # Binary operation
+#             self.visit(node.children[0])
+#             self.code += "PUSH AX\n"
+#             self.visit(node.children[2])
+#             self.code += "POP BX\n"
+#             if node.children[1].type == 'PLUS':
+#                 self.code += "ADD AX, BX\n"
+#             elif node.children[1].type == 'MINUS':
+#                 self.code += "SUB AX, BX\n"
+#
+#     def visit_term(self, node):
+#         if len(node.children) == 3:
+#             # Binary operation
+#             self.visit(node.children[0])
+#             self.code += "PUSH AX\n"
+#             self.visit(node.children[2])
+#             self.code += "POP BX\n"
+#             if node.children[1].type == 'TIMES':
+#                 self.code += "MUL BX\n"
+#             elif node.children[1].type == 'DIVIDE':
+#                 self.code += "XCHG AX, BX\n"
+#                 self.code += "CWD\n"
+#                 self.code += "IDIV BX\n"
+#
+#     def visit_factor(self, node):
+#         if node.value.isdigit():
+#             # Integer literal
+#             self.code += f"MOV AX, {node.value}\n"
+#         else:
+#             # Variable
+#             self.code += f"MOV AX, [{node.value}]\n"
 
 #-------------------------------------------------------------------------
 #Функция для генерации ассемблерского кода из AST
